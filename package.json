@@ -10,7 +10,8 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "expo-doctor": "pnpx expo-doctor --verbose",
-    "expo-install-check": "pnpx expo install --check"
+    "expo-install-check": "pnpx expo install --check",
+    "build": "eas build --platform android --profile preview --local"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
