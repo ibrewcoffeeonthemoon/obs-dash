@@ -1,50 +1,57 @@
-# Welcome to your Expo app 👋
+# OBS Dash
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Development
 
-## Get started
-
-1. Install dependencies
+1. Create from template
 
    ```bash
-   npm install
+   pnpx create-expo-app@latest
    ```
 
-2. Start the app
+2. Install Expo Go
+   
+   Go to Play Store and search for `Expo Go`.
+
+3. Run dev server
 
    ```bash
-   npx expo start
+   pnpx start
    ```
 
-In the output, you'll find options to open the app in a
+4. Scan QR code using Expo Go app
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   Make changes to `app/(tabs)/index.tsx` and observe changes in Expo Go.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Build
 
-## Get a fresh project
+1. Install Android Studio on WSL Linux side
 
-When you're ready, run:
+   ```bash
+   yay -S android-studio
+   ```
 
-```bash
-npm run reset-project
-```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Install OpenJDK
 
-## Learn more
+   ```bash
+   pacman -S jdk17-openjdk
+   ```
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+3. Open up `android-studio` in WSL 
 
-## Join the community
+   The GUI should fire up. Continue with the installation. Make sure commandline tools, NDK (side by side) and CMake are install.
 
-Join our community of developers creating universal apps.
+   Make sure commandline tools binaries are on the PATH.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+4. Set the correct PATH
+
+   Set the correct path for `$ANDROID_HOME`. Also, set the correct path for `$JAVA_HOME`
+
+5. Try to run the build script
+
+   See if the build is successful. If not, run expo-doctor and expo install --check script to see if any package version mismatch.
+
+   If mismatch, use `pnpx expo install <package>` to install or update it to the correct version.
+
+   If all packages version match, build should be successful, the apk file is emitted at project root.
