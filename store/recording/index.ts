@@ -18,6 +18,10 @@ export const useStore = create<Store>()(
           set((s) => {
             s.stash.isRecording = val;
           }),
+        setRecordingTime: (val) =>
+          set((s) => {
+            s.stash.recordingTime = val;
+          }),
       },
     })),
     {
