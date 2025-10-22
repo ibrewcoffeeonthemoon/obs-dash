@@ -20,7 +20,16 @@ export const RecordingTime = () => {
       try {
         const { outputTimecode } = await obs.call("GetRecordStatus");
         if (outputTimecode) {
-          setRecordingTime(outputTimecode.split(".")[0]); // Remove milliseconds
+          // Split timecode (e.g., "00:00:00.000" -> ["00", "00", "00"])
+          const [hours, minutes, seconds] = outputTimecode
+            .split(".")[0]
+            .split(":");
+          // Display mm:ss if hours are "00", else hh:mm:ss
+          const formattedTimecode =
+            hours === "00"
+              ? `${minutes}:${seconds}`
+              : `${hours}:${minutes}:${seconds}`;
+          setRecordingTime(formattedTimecode);
         }
       } catch (error) {
         console.error("Failed to fetch timecode:", error);
@@ -46,7 +55,7 @@ export const RecordingTime = () => {
     >
       <ThemedText
         style={{
-          fontSize: 120,
+          fontSize: 200, //120
           lineHeight: 200,
           textAlign: "center",
         }}
