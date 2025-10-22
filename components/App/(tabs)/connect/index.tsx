@@ -10,6 +10,7 @@ import { Title } from "./Title";
 import { useStore } from "@/store/connect";
 import { IpAddressInput } from "./IpAddressInput";
 import { PortInput } from "./PortInput";
+import { PasswordInput } from "./PasswordInput";
 
 const obs = new OBSWebSocket();
 
@@ -64,29 +65,7 @@ export default function Connect() {
         <Title />
         <IpAddressInput />
         <PortInput />
-
-        <ThemedView style={styles.stepContainer}>
-          <ThemedView
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <ThemedText type="subtitle">Password</ThemedText>
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              <ThemedText>{showPassword ? "hide" : "show"}</ThemedText>
-            </TouchableOpacity>
-          </ThemedView>
-          <ThemedTextInput
-            style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Enter Password"
-            secureTextEntry={!showPassword}
-            selectTextOnFocus
-          />
-        </ThemedView>
+        <PasswordInput />
 
         <ThemedView style={styles.stepContainer}>
           <TouchableOpacity onPress={connectOBS}>
