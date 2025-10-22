@@ -11,8 +11,7 @@ import { useStore } from "@/store/connect";
 import { IpAddressInput } from "./IpAddressInput";
 import { PortInput } from "./PortInput";
 import { PasswordInput } from "./PasswordInput";
-
-const obs = new OBSWebSocket();
+import { ConnectButton } from "./ConnectButton";
 
 export default function Connect() {
   const ipAddress = useStore((s) => s.state.ipAddress);
@@ -37,21 +36,6 @@ export default function Connect() {
     scrollViewRef.current?.scrollToEnd({ animated: true });
   }, [log]);
 
-  const connectOBS = async () => {
-    try {
-      appendLog("Connecting...");
-      await obs.connect(`ws://${ipAddress}:${port}`, password);
-      appendLog("Connected to OBS");
-    } catch (error) {
-      appendLog("Failed to connect to OBS");
-    }
-  };
-  const disconnectOBS = async () => {
-    appendLog("Disconnecting...");
-    await obs.disconnect();
-    appendLog("Disconnected to OBS");
-  };
-
   return (
     <>
       <Banner />
@@ -66,17 +50,7 @@ export default function Connect() {
         <IpAddressInput />
         <PortInput />
         <PasswordInput />
-
-        <ThemedView style={styles.stepContainer}>
-          <TouchableOpacity onPress={connectOBS}>
-            <ThemedText>Connect OBS</ThemedText>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={disconnectOBS}>
-            <ThemedText>Disconnect OBS</ThemedText>
-          </TouchableOpacity>
-        </ThemedView>
-
+        <ConnectButton />
         <ScrollView ref={scrollViewRef} style={{ overflow: "scroll" }}>
           <ThemedTextInput
             value={log}
