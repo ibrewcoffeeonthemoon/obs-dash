@@ -2,6 +2,7 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Banner } from "./Banner";
 import { Title } from "./Title";
+import { RecordingTime } from "./RecordingTime";
 
 export default function Recording() {
   return (
@@ -15,8 +16,7 @@ export default function Recording() {
         }}
       >
         <Title />
-        <ThemedText>Quick Toggle to start/pause/stop OBS recording</ThemedText>
-        <ThemedText type="subtitle">Show recording time</ThemedText>
+        <RecordingTime />
         <ThemedText type="subtitle">Start/Pause/Stop button</ThemedText>
       </ThemedView>
     </>
