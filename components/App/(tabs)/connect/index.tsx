@@ -1,37 +1,14 @@
-import { Image } from "expo-image";
-import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useEffect, useRef, useState } from "react";
 import { OBSWebSocket } from "obs-websocket-js";
 import { ThemedTextInput } from "@/components/themed-textinput";
+import { styles } from "./styles";
+import { Banner } from "./Banner";
+import { Title } from "./Title";
 
 const obs = new OBSWebSocket();
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 8,
-    borderRadius: 4,
-  },
-});
 
 export default function Connect() {
   const [ipAddress, setIpAddress] = useState("192.168.1.99");
@@ -71,12 +48,7 @@ export default function Connect() {
 
   return (
     <>
-      <ThemedView style={{ ...styles.titleContainer, height: 150 }}>
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      </ThemedView>
+      <Banner />
       <ThemedView
         style={{
           flex: 1,
@@ -84,10 +56,7 @@ export default function Connect() {
           gap: 16,
         }}
       >
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Connect To OBS Websocket</ThemedText>
-        </ThemedView>
-
+        <Title />
         <ThemedView style={styles.stepContainer}>
           <ThemedText type="subtitle">IP Address</ThemedText>
           <ThemedTextInput
