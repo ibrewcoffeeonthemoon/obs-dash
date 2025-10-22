@@ -3,6 +3,7 @@ import { Banner } from "./Banner";
 import { RecordingTime } from "./RecordingTime";
 import { RecordButton } from "./RecordButton";
 import { stores } from "@/store";
+import { ThemedText } from "@/components/themed-text";
 
 export default function Recording() {
   const isConnected = stores.connect.useStore((s) => s.stash.isConnected);
@@ -17,11 +18,13 @@ export default function Recording() {
           gap: 16,
         }}
       >
-        {isConnected && (
+        {isConnected ? (
           <>
             <RecordingTime />
             <RecordButton />
           </>
+        ) : (
+          <ThemedText type="title">Please connect to OBS first.</ThemedText>
         )}
       </ThemedView>
     </>
