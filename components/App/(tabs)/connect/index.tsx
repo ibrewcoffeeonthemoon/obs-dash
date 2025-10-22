@@ -12,6 +12,7 @@ import { IpAddressInput } from "./IpAddressInput";
 import { PortInput } from "./PortInput";
 import { PasswordInput } from "./PasswordInput";
 import { ConnectButton } from "./ConnectButton";
+import { LogArea } from "./LogArea";
 
 export default function Connect() {
   const ipAddress = useStore((s) => s.state.ipAddress);
@@ -30,12 +31,6 @@ export default function Connect() {
   const appendLog = useStore((s) => s.action.appendLog);
   const clearLog = useStore((s) => s.action.clearLog);
 
-  const scrollViewRef = useRef<ScrollView>(null);
-
-  useEffect(() => {
-    scrollViewRef.current?.scrollToEnd({ animated: true });
-  }, [log]);
-
   return (
     <>
       <Banner />
@@ -51,17 +46,7 @@ export default function Connect() {
         <PortInput />
         <PasswordInput />
         <ConnectButton />
-        <ScrollView ref={scrollViewRef} style={{ overflow: "scroll" }}>
-          <ThemedTextInput
-            value={log}
-            multiline
-            editable={false}
-            scrollEnabled
-          />
-        </ScrollView>
-        <TouchableOpacity onPress={clearLog}>
-          <ThemedText>Clear</ThemedText>
-        </TouchableOpacity>
+        <LogArea />
       </ThemedView>
     </>
   );
