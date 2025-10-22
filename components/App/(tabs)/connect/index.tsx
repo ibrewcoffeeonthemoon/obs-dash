@@ -1,4 +1,3 @@
-import { Image } from "expo-image";
 import { ScrollView, TouchableOpacity } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -6,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { OBSWebSocket } from "obs-websocket-js";
 import { ThemedTextInput } from "@/components/themed-textinput";
 import { styles } from "./styles";
+import { Banner } from "./Banner";
 
 const obs = new OBSWebSocket();
 
@@ -47,12 +47,7 @@ export default function Connect() {
 
   return (
     <>
-      <ThemedView style={{ ...styles.titleContainer, height: 150 }}>
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      </ThemedView>
+      <Banner />
       <ThemedView
         style={{
           flex: 1,
