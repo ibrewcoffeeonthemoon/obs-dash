@@ -6,6 +6,7 @@ import { OBSWebSocket } from "obs-websocket-js";
 import { ThemedTextInput } from "@/components/themed-textinput";
 import { styles } from "./styles";
 import { Banner } from "./Banner";
+import { Title } from "./Title";
 
 const obs = new OBSWebSocket();
 
@@ -55,10 +56,7 @@ export default function Connect() {
           gap: 16,
         }}
       >
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Connect To OBS Websocket</ThemedText>
-        </ThemedView>
-
+        <Title />
         <ThemedView style={styles.stepContainer}>
           <ThemedText type="subtitle">IP Address</ThemedText>
           <ThemedTextInput
