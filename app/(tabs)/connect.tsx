@@ -75,6 +75,7 @@ export default function Connect() {
           value={ipAddress}
           onChangeText={setIpAddress}
           placeholder="Enter IP Address"
+          selectTextOnFocus
         />
       </ThemedView>
 
@@ -86,6 +87,7 @@ export default function Connect() {
           onChangeText={setPort}
           placeholder="Enter Port"
           keyboardType="numeric"
+          selectTextOnFocus
         />
       </ThemedView>
 
@@ -108,6 +110,7 @@ export default function Connect() {
           onChangeText={setPassword}
           placeholder="Enter Password"
           secureTextEntry={!showPassword}
+          selectTextOnFocus
         />
       </ThemedView>
 
