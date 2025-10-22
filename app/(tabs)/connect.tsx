@@ -1,10 +1,11 @@
 import { Image } from "expo-image";
-import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useState } from "react";
 import { OBSWebSocket } from "obs-websocket-js";
+import { ThemedTextInput } from "@/components/themed-textinput";
 
 const obs = new OBSWebSocket();
 
@@ -68,7 +69,7 @@ export default function Connect() {
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">IP Address</ThemedText>
-        <TextInput
+        <ThemedTextInput
           style={styles.input}
           value={ipAddress}
           onChangeText={setIpAddress}
@@ -78,7 +79,7 @@ export default function Connect() {
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Port</ThemedText>
-        <TextInput
+        <ThemedTextInput
           style={styles.input}
           value={port}
           onChangeText={setPort}
@@ -89,7 +90,7 @@ export default function Connect() {
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Password</ThemedText>
-        <TextInput
+        <ThemedTextInput
           style={styles.input}
           value={password}
           onChangeText={setPassword}
