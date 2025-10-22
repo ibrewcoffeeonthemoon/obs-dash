@@ -1,10 +1,11 @@
 import { Image } from "expo-image";
-import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useState } from "react";
 import { OBSWebSocket } from "obs-websocket-js";
+import { ThemedTextInput } from "@/components/themed-textinput";
 
 const obs = new OBSWebSocket();
 
@@ -37,6 +38,7 @@ export default function Connect() {
   const [ipAddress, setIpAddress] = useState("192.168.1.99");
   const [port, setPort] = useState("4455");
   const [password, setPassword] = useState("M7B4kY415rGdnslb");
+  const [showPassword, setShowPassword] = useState(false);
   const [response, setResponse] = useState("---");
 
   const connectOBS = async () => {
@@ -68,7 +70,7 @@ export default function Connect() {
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">IP Address</ThemedText>
-        <TextInput
+        <ThemedTextInput
           style={styles.input}
           value={ipAddress}
           onChangeText={setIpAddress}
@@ -78,7 +80,7 @@ export default function Connect() {
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Port</ThemedText>
-        <TextInput
+        <ThemedTextInput
           style={styles.input}
           value={port}
           onChangeText={setPort}
@@ -89,13 +91,18 @@ export default function Connect() {
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Password</ThemedText>
-        <TextInput
+        <ThemedTextInput
           style={styles.input}
           value={password}
           onChangeText={setPassword}
           placeholder="Enter Password"
-          secureTextEntry
+          secureTextEntry={!showPassword}
         />
+        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <ThemedText>
+            {showPassword ? "Hide password" : "Show password"}
+          </ThemedText>
+        </TouchableOpacity>
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
