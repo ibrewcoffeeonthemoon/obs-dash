@@ -1,7 +1,6 @@
 import { ThemedView } from "@/components/themed-view";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { styles as otherStyles } from "./styles";
-import { TouchableOpacity } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { useStore } from "@/store/connect";
 import { OBSWebSocket } from "obs-websocket-js";

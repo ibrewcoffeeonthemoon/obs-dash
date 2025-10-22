@@ -1,7 +1,5 @@
-import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Banner } from "./Banner";
-import { Title } from "./Title";
 import { RecordingTime } from "./RecordingTime";
 import { RecordButton } from "./RecordButton";
 
@@ -18,7 +16,6 @@ export default function Recording() {
       >
         <RecordingTime />
         <RecordButton />
-        <ThemedText type="subtitle">Start/Pause/Stop button</ThemedText>
       </ThemedView>
     </>
   );
