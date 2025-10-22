@@ -1,6 +1,5 @@
 import { Image } from "expo-image";
-import { StyleSheet, TouchableOpacity } from "react-native";
-
+import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -26,15 +25,24 @@ const styles = StyleSheet.create({
     left: 0,
     position: "absolute",
   },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 8,
+    borderRadius: 4,
+  },
 });
 
 export default function Connect() {
+  const [ipAddress, setIpAddress] = useState("192.168.1.99");
+  const [port, setPort] = useState("4455");
+  const [password, setPassword] = useState("M7B4kY415rGdnslb");
   const [response, setResponse] = useState("---");
 
   const connectOBS = async () => {
     try {
       setResponse("Connecting...");
-      await obs.connect("ws://192.168.1.99:4455", "M7B4kY415rGdnslb");
+      await obs.connect(`ws://${ipAddress}:${port}`, password);
       setResponse("Connected to OBS");
     } catch (error) {
       setResponse("Failed to connect to OBS");
@@ -60,12 +68,34 @@ export default function Connect() {
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">IP Address</ThemedText>
-        <ThemedText>[input field][192.168.1.99]</ThemedText>
+        <TextInput
+          style={styles.input}
+          value={ipAddress}
+          onChangeText={setIpAddress}
+          placeholder="Enter IP Address"
+        />
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Port</ThemedText>
-        <ThemedText>[input field][4455]</ThemedText>
+        <TextInput
+          style={styles.input}
+          value={port}
+          onChangeText={setPort}
+          placeholder="Enter Port"
+          keyboardType="numeric"
+        />
+      </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Password</ThemedText>
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Enter Password"
+          secureTextEntry
+        />
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
