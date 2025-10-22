@@ -90,7 +90,18 @@ export default function Connect() {
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Password</ThemedText>
+        <ThemedView
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <ThemedText type="subtitle">Password</ThemedText>
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <ThemedText>{showPassword ? "hide" : "show"}</ThemedText>
+          </TouchableOpacity>
+        </ThemedView>
         <ThemedTextInput
           style={styles.input}
           value={password}
@@ -98,11 +109,6 @@ export default function Connect() {
           placeholder="Enter Password"
           secureTextEntry={!showPassword}
         />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <ThemedText>
-            {showPassword ? "Hide password" : "Show password"}
-          </ThemedText>
-        </TouchableOpacity>
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
