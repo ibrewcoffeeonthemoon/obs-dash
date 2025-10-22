@@ -9,6 +9,7 @@ import { Banner } from "./Banner";
 import { Title } from "./Title";
 import { useStore } from "@/store/connect";
 import { IpAddressInput } from "./IpAddressInput";
+import { PortInput } from "./PortInput";
 
 const obs = new OBSWebSocket();
 
@@ -62,18 +63,7 @@ export default function Connect() {
       >
         <Title />
         <IpAddressInput />
-
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Port</ThemedText>
-          <ThemedTextInput
-            style={styles.input}
-            value={port}
-            onChangeText={setPort}
-            placeholder="Enter Port"
-            keyboardType="numeric"
-            selectTextOnFocus
-          />
-        </ThemedView>
+        <PortInput />
 
         <ThemedView style={styles.stepContainer}>
           <ThemedView
