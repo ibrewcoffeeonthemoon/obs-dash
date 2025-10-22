@@ -38,6 +38,7 @@ export default function Connect() {
   const [ipAddress, setIpAddress] = useState("192.168.1.99");
   const [port, setPort] = useState("4455");
   const [password, setPassword] = useState("M7B4kY415rGdnslb");
+  const [showPassword, setShowPassword] = useState(false);
   const [response, setResponse] = useState("---");
 
   const connectOBS = async () => {
@@ -95,8 +96,13 @@ export default function Connect() {
           value={password}
           onChangeText={setPassword}
           placeholder="Enter Password"
-          secureTextEntry
+          secureTextEntry={!showPassword}
         />
+        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <ThemedText>
+            {showPassword ? "Hide password" : "Show password"}
+          </ThemedText>
+        </TouchableOpacity>
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
