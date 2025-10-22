@@ -52,6 +52,8 @@ export default function Connect() {
     );
   };
 
+  const clearLog = () => setLog("");
+
   const connectOBS = async () => {
     try {
       appendToLog("Connecting...");
@@ -69,7 +71,7 @@ export default function Connect() {
 
   return (
     <>
-      <ThemedView style={{ ...styles.titleContainer, height: 200 }}>
+      <ThemedView style={{ ...styles.titleContainer, height: 150 }}>
         <Image
           source={require("@/assets/images/partial-react-logo.png")}
           style={styles.reactLogo}
@@ -150,6 +152,9 @@ export default function Connect() {
             scrollEnabled
           />
         </ScrollView>
+        <TouchableOpacity onPress={clearLog}>
+          <ThemedText>Clear</ThemedText>
+        </TouchableOpacity>
       </ThemedView>
     </>
   );
