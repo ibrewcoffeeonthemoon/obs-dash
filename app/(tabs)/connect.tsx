@@ -2,7 +2,7 @@ import { Image } from "expo-image";
 import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { OBSWebSocket } from "obs-websocket-js";
 import { ThemedTextInput } from "@/components/themed-textinput";
 
@@ -39,6 +39,11 @@ export default function Connect() {
   const [password, setPassword] = useState("M7B4kY415rGdnslb");
   const [showPassword, setShowPassword] = useState(false);
   const [log, setLog] = useState("");
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    scrollViewRef.current?.scrollToEnd({ animated: true });
+  }, [log]);
 
   const appendToLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
@@ -137,7 +142,7 @@ export default function Connect() {
           </TouchableOpacity>
         </ThemedView>
 
-        <ScrollView style={{ overflow: "scroll" }}>
+        <ScrollView ref={scrollViewRef} style={{ overflow: "scroll" }}>
           <ThemedTextInput
             value={log}
             multiline
