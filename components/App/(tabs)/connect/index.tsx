@@ -1,47 +1,30 @@
 import { ScrollView, TouchableOpacity } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { OBSWebSocket } from "obs-websocket-js";
 import { ThemedTextInput } from "@/components/themed-textinput";
 import { styles } from "./styles";
 import { Banner } from "./Banner";
 import { Title } from "./Title";
-import { store, useStore } from "@/store/connect";
+import { useStore } from "@/store/connect";
 
 const obs = new OBSWebSocket();
 
 export default function Connect() {
-  // const [ipAddress, setIpAddress] = useState("192.168.1.99");
-  // const ipAddress = store.state().ipAddress;
-  // const setIpAddress = store.action().setIpAddress;
   const ipAddress = useStore((s) => s.state.ipAddress);
   const setIpAddress = useStore((s) => s.action.setIpAddress);
 
-  // const [port, setPort] = useState("4455");
-  // const port = store.state().port;
-  // const setPort = store.action().setPort;
   const port = useStore((s) => s.state.port);
   const setPort = useStore((s) => s.action.setPort);
 
-  // const [password, setPassword] = useState("M7B4kY415rGdnslb");
-  // const password = store.state().password;
-  // const setPassword = store.action().setPassword;
   const password = useStore((s) => s.state.password);
   const setPassword = useStore((s) => s.action.setPassword);
 
-  // const [showPassword, setShowPassword] = useState(false);
-  // const showPassword = store.stash().showPassword;
-  // const setShowPassword = store.action().setShowPassword;
   const showPassword = useStore((s) => s.stash.showPassword);
   const setShowPassword = useStore((s) => s.action.setShowPassword);
 
-  // const [log, setLog] = useState("");
-  // const log = store.stash().log;
-  // const setLog = store.action().setLog;
-  // const clearLog = store.action().clearLog;
   const log = useStore((s) => s.stash.log);
-  const setLog = useStore((s) => s.action.setLog);
   const appendLog = useStore((s) => s.action.appendLog);
   const clearLog = useStore((s) => s.action.clearLog);
 
