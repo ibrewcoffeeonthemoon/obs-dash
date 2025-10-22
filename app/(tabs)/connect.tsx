@@ -75,6 +75,7 @@ export default function Connect() {
           value={ipAddress}
           onChangeText={setIpAddress}
           placeholder="Enter IP Address"
+          selectTextOnFocus
         />
       </ThemedView>
 
@@ -86,23 +87,31 @@ export default function Connect() {
           onChangeText={setPort}
           placeholder="Enter Port"
           keyboardType="numeric"
+          selectTextOnFocus
         />
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Password</ThemedText>
+        <ThemedView
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <ThemedText type="subtitle">Password</ThemedText>
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <ThemedText>{showPassword ? "hide" : "show"}</ThemedText>
+          </TouchableOpacity>
+        </ThemedView>
         <ThemedTextInput
           style={styles.input}
           value={password}
           onChangeText={setPassword}
           placeholder="Enter Password"
           secureTextEntry={!showPassword}
+          selectTextOnFocus
         />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <ThemedText>
-            {showPassword ? "Hide password" : "Show password"}
-          </ThemedText>
-        </TouchableOpacity>
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
