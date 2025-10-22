@@ -1,20 +1,25 @@
 import { ThemedText } from "@/components/themed-text";
 import { obs } from "@/lib/obs";
+import { stores } from "@/store";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 export const RecordButton = () => {
-  // Toggle recording (start if stopped, stop if recording)
+  const isRecording = stores.recording.useStore((s) => s.stash.isRecording);
+  const setIsRecording = stores.recording.useStore(
+    (s) => s.action.setIsRecording,
+  );
+
   async function toggleRecording() {
     try {
-      // First, check current status
-      const status = await obs.call("GetRecordStatus");
-      const isRecording = status.outputActive;
+      const { outputActive } = await obs.call("GetRecordStatus");
 
-      if (isRecording) {
+      if (outputActive) {
         await obs.call("StopRecord");
+        setIsRecording(false);
         console.log("Recording stopped");
       } else {
         await obs.call("StartRecord");
+        setIsRecording(true);
         console.log("Recording started");
       }
     } catch (error) {
@@ -24,10 +29,15 @@ export const RecordButton = () => {
 
   return (
     <TouchableOpacity
-      style={{ ...styles.button, backgroundColor: "green" }}
+      style={{
+        ...styles.button,
+        backgroundColor: isRecording ? "red" : "green",
+      }}
       onPress={() => toggleRecording()}
     >
-      <ThemedText style={styles.buttonText}>Start</ThemedText>
+      <ThemedText style={styles.buttonText}>
+        {isRecording ? "Stop" : "Start"}
+      </ThemedText>
     </TouchableOpacity>
   );
 };
