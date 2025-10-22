@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 
 import { HelloWave } from "@/components/hello-wave";
 import ParallaxScrollView from "@/components/parallax-scroll-view";
@@ -12,10 +12,16 @@ import { OBSWebSocket } from "obs-websocket-js";
 const obs = new OBSWebSocket();
 
 export default function HomeScreen() {
-  const [response, setResponse] = useState("Ready to connect");
+  const [response, setResponse] = useState("---");
 
   const connectOBS = async () => {
-    await obs.connect("ws://192.168.1.99:4455", "M7B4kY415rGdnslb");
+    try {
+      setResponse("Connecting...");
+      await obs.connect("ws://192.168.1.99:4455", "M7B4kY415rGdnslb");
+      setResponse("Connected to OBS");
+    } catch (error) {
+      setResponse("Failed to connect to OBS");
+    }
   };
   const disconnectOBS = async () => {
     await obs.disconnect();
