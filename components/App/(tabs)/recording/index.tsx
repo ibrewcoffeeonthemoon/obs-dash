@@ -1,49 +1,24 @@
-import { StyleSheet } from "react-native";
-import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Fonts } from "@/constants/theme";
-
-const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
-  },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
-  },
-});
+import { Banner } from "./Banner";
+import { Title } from "./Title";
 
 export default function Recording() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}
-        >
-          Recording Control
-        </ThemedText>
+    <>
+      <Banner />
+      <ThemedView
+        style={{
+          flex: 1,
+          padding: 32,
+          gap: 16,
+        }}
+      >
+        <Title />
+        <ThemedText>Quick Toggle to start/pause/stop OBS recording</ThemedText>
+        <ThemedText type="subtitle">Show recording time</ThemedText>
+        <ThemedText type="subtitle">Start/Pause/Stop button</ThemedText>
       </ThemedView>
-      <ThemedText>Quick Toggle to start/pause/stop OBS recording</ThemedText>
-      <ThemedText type="subtitle">Show recording time</ThemedText>
-      <ThemedText type="subtitle">Start/Pause/Stop button</ThemedText>
-    </ParallaxScrollView>
+    </>
   );
 }
