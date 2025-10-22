@@ -12,7 +12,37 @@ export const useStore = create<Store>()(
     immer((set) => ({
       state: state(),
       stash: stash(),
-      action: {},
+      action: {
+        setIpAddress: (val) =>
+          set((s) => {
+            s.state.ipAddress = val;
+          }),
+        setPort: (val) =>
+          set((s) => {
+            s.state.port = val;
+          }),
+        setPassword: (val) =>
+          set((s) => {
+            s.state.password = val;
+          }),
+        setShowPassword: (val) =>
+          set((s) => {
+            s.stash.showPassword = val;
+          }),
+        setLog: (val) =>
+          set((s) => {
+            s.stash.log = val;
+          }),
+        appendLog: (val) =>
+          set((s) => {
+            const timestamp = new Date().toLocaleTimeString();
+            s.stash.log = `${s.stash.log}${s.stash.log ? "\n" : ""}[${timestamp}] ${val}`;
+          }),
+        clearLog: () =>
+          set((s) => {
+            s.stash.log = "";
+          }),
+      },
     })),
     {
       name: "store.connect",

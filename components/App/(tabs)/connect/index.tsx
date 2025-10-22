@@ -7,43 +7,63 @@ import { ThemedTextInput } from "@/components/themed-textinput";
 import { styles } from "./styles";
 import { Banner } from "./Banner";
 import { Title } from "./Title";
+import { store, useStore } from "@/store/connect";
 
 const obs = new OBSWebSocket();
 
 export default function Connect() {
-  const [ipAddress, setIpAddress] = useState("192.168.1.99");
-  const [port, setPort] = useState("4455");
-  const [password, setPassword] = useState("M7B4kY415rGdnslb");
-  const [showPassword, setShowPassword] = useState(false);
-  const [log, setLog] = useState("");
+  // const [ipAddress, setIpAddress] = useState("192.168.1.99");
+  // const ipAddress = store.state().ipAddress;
+  // const setIpAddress = store.action().setIpAddress;
+  const ipAddress = useStore((s) => s.state.ipAddress);
+  const setIpAddress = useStore((s) => s.action.setIpAddress);
+
+  // const [port, setPort] = useState("4455");
+  // const port = store.state().port;
+  // const setPort = store.action().setPort;
+  const port = useStore((s) => s.state.port);
+  const setPort = useStore((s) => s.action.setPort);
+
+  // const [password, setPassword] = useState("M7B4kY415rGdnslb");
+  // const password = store.state().password;
+  // const setPassword = store.action().setPassword;
+  const password = useStore((s) => s.state.password);
+  const setPassword = useStore((s) => s.action.setPassword);
+
+  // const [showPassword, setShowPassword] = useState(false);
+  // const showPassword = store.stash().showPassword;
+  // const setShowPassword = store.action().setShowPassword;
+  const showPassword = useStore((s) => s.stash.showPassword);
+  const setShowPassword = useStore((s) => s.action.setShowPassword);
+
+  // const [log, setLog] = useState("");
+  // const log = store.stash().log;
+  // const setLog = store.action().setLog;
+  // const clearLog = store.action().clearLog;
+  const log = useStore((s) => s.stash.log);
+  const setLog = useStore((s) => s.action.setLog);
+  const appendLog = useStore((s) => s.action.appendLog);
+  const clearLog = useStore((s) => s.action.clearLog);
+
   const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     scrollViewRef.current?.scrollToEnd({ animated: true });
   }, [log]);
 
-  const appendToLog = (message: string) => {
-    const timestamp = new Date().toLocaleTimeString();
-    setLog(
-      (prevLog) => `${prevLog}${prevLog ? "\n" : ""}[${timestamp}] ${message}`,
-    );
-  };
-
-  const clearLog = () => setLog("");
-
   const connectOBS = async () => {
     try {
-      appendToLog("Connecting...");
+      appendLog("Connecting...");
       await obs.connect(`ws://${ipAddress}:${port}`, password);
-      appendToLog("Connected to OBS");
+      appendLog("Connected to OBS");
     } catch (error) {
-      appendToLog("Failed to connect to OBS");
+      appendLog("Failed to connect to OBS");
     }
   };
   const disconnectOBS = async () => {
-    appendToLog("Disconnecting...");
+    appendLog("Disconnecting...");
     await obs.disconnect();
-    appendToLog("Disconnected to OBS");
+    appendLog("Disconnected to OBS");
   };
 
   return (
