@@ -36,10 +36,17 @@ export const ConnectButton = () => {
   };
 
   const disconnectOBS = async () => {
-    appendLog("Disconnecting...");
-    await obs.disconnect();
-    appendLog("Disconnected to OBS");
-    setIsConnected(false);
+    try {
+      await obs.disconnect();
+      appendLog("Disconnected from OBS");
+      setIsConnected(false);
+    } catch (error) {
+      if (error instanceof OBSWebSocketError) {
+        appendLog(`Error during disconnect, ${error.code}, ${error.message}`);
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   return (
