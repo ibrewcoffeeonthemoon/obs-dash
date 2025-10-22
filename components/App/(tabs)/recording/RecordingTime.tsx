@@ -18,7 +18,6 @@ export const RecordingTime = () => {
       >
         10:25
       </ThemedText>
-      ;
     </ThemedView>
   );
 };
