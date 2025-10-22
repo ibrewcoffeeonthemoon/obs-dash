@@ -2,7 +2,7 @@ export const STATE = {};
 
 export const STASH = {
   isRecording: false,
-  recordingTime: "--:--",
+  recordingTime: "00:00",
 };
 
 export type State = {

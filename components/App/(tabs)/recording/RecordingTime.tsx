@@ -2,12 +2,13 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { obs } from "@/lib/obs";
 import { useStore } from "@/store/recording";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const RecordingTime = () => {
   const isRecording = useStore((s) => s.stash.isRecording);
   const recordingTime = useStore((s) => s.stash.recordingTime);
   const setRecordingTime = useStore((s) => s.action.setRecordingTime);
+  const [showHours, setShowHours] = useState(false);
 
   useEffect(() => {
     // Only poll when recording is active
@@ -30,6 +31,7 @@ export const RecordingTime = () => {
               ? `${minutes}:${seconds}`
               : `${hours}:${minutes}:${seconds}`;
           setRecordingTime(formattedTimecode);
+          setShowHours(hours !== "00");
         }
       } catch (error) {
         console.error("Failed to fetch timecode:", error);
@@ -55,7 +57,7 @@ export const RecordingTime = () => {
     >
       <ThemedText
         style={{
-          fontSize: 200, //120
+          fontSize: showHours ? 120 : 200,
           lineHeight: 200,
           textAlign: "center",
         }}
