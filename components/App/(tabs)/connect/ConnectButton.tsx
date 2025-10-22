@@ -1,5 +1,6 @@
 import { ThemedView } from "@/components/themed-view";
-import { styles } from "./styles";
+import { StyleSheet } from "react-native";
+import { styles as otherStyles } from "./styles";
 import { TouchableOpacity } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { useStore } from "@/store/connect";
@@ -30,13 +31,35 @@ export const ConnectButton = () => {
 
   return (
     <ThemedView style={styles.stepContainer}>
-      <TouchableOpacity onPress={connectOBS}>
-        <ThemedText>Connect OBS</ThemedText>
+      <TouchableOpacity
+        style={{ ...styles.button, backgroundColor: "green" }}
+        onPress={connectOBS}
+      >
+        <ThemedText style={styles.buttonText}>Connect OBS</ThemedText>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={disconnectOBS}>
-        <ThemedText>Disconnect OBS</ThemedText>
+      <TouchableOpacity
+        style={{ ...styles.button, backgroundColor: "red" }}
+        onPress={disconnectOBS}
+      >
+        <ThemedText style={styles.buttonText}>Disconnect OBS</ThemedText>
       </TouchableOpacity>
     </ThemedView>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: "center",
+    marginVertical: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  ...otherStyles,
+});
