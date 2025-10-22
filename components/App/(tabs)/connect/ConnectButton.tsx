@@ -4,6 +4,7 @@ import { styles as otherStyles } from "./styles";
 import { ThemedText } from "@/components/themed-text";
 import { useStore } from "@/store/connect";
 import { obs } from "@/lib/obs";
+import { OBSWebSocketError } from "obs-websocket-js";
 
 export const ConnectButton = () => {
   const ipAddress = useStore((s) => s.state.ipAddress);
@@ -15,15 +16,25 @@ export const ConnectButton = () => {
 
   const connectOBS = async () => {
     try {
-      appendLog("Connecting...");
-      await obs.connect(`ws://${ipAddress}:${port}`, password);
-      appendLog("Connected to OBS");
+      const { obsWebSocketVersion, negotiatedRpcVersion } = await obs.connect(
+        `ws://${ipAddress}:${port}`,
+        password,
+        { rpcVersion: 1 },
+      );
+      appendLog(
+        `Connected to server ${obsWebSocketVersion} (using RPC ${negotiatedRpcVersion})`,
+      );
       setIsConnected(true);
     } catch (error) {
-      appendLog("Failed to connect to OBS");
-      setIsConnected(false);
+      if (error instanceof OBSWebSocketError) {
+        appendLog(`Failed to connect, ${error.code}, ${error.message}`);
+        setIsConnected(false);
+      } else {
+        console.log(error);
+      }
     }
   };
+
   const disconnectOBS = async () => {
     appendLog("Disconnecting...");
     await obs.disconnect();
