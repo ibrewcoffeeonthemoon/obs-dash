@@ -39,19 +39,28 @@ export default function Connect() {
   const [port, setPort] = useState("4455");
   const [password, setPassword] = useState("M7B4kY415rGdnslb");
   const [showPassword, setShowPassword] = useState(false);
-  const [response, setResponse] = useState("---");
+  const [log, setLog] = useState("");
+
+  const appendToLog = (message: string) => {
+    const timestamp = new Date().toLocaleTimeString();
+    setLog(
+      (prevLog) => `${prevLog}${prevLog ? "\n" : ""}[${timestamp}] ${message}`,
+    );
+  };
 
   const connectOBS = async () => {
     try {
-      setResponse("Connecting...");
+      appendToLog("Connecting...");
       await obs.connect(`ws://${ipAddress}:${port}`, password);
-      setResponse("Connected to OBS");
+      appendToLog("Connected to OBS");
     } catch (error) {
-      setResponse("Failed to connect to OBS");
+      appendToLog("Failed to connect to OBS");
     }
   };
   const disconnectOBS = async () => {
+    appendToLog("Disconnecting...");
     await obs.disconnect();
+    appendToLog("Disconnected to OBS");
   };
 
   return (
@@ -115,14 +124,15 @@ export default function Connect() {
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
-        <ThemedText>{response}</ThemedText>
         <TouchableOpacity onPress={connectOBS}>
           <ThemedText>Connect OBS</ThemedText>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={disconnectOBS}>
           <ThemedText>Disconnect OBS</ThemedText>
         </TouchableOpacity>
       </ThemedView>
+      <ThemedTextInput value={log} multiline editable={false} scrollEnabled />
     </ParallaxScrollView>
   );
 }
