@@ -11,7 +11,7 @@
     "lint": "expo lint",
     "expo-doctor": "pnpx expo-doctor --verbose",
     "expo-install-check": "pnpx expo install --check",
-    "build": "eas build --platform android --profile preview --local"
+    "build": "eas build --platform android --profile preview --output ./build/OBSDash-$(date +%Y.%m.%d-%H.%M.%S).apk --local"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
