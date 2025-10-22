@@ -30,6 +30,10 @@ export const useStore = create<Store>()(
           set((s) => {
             s.stash.showPassword = val;
           }),
+        setIsConnected: (val) =>
+          set((s) => {
+            s.stash.isConnected = val;
+          }),
         setLog: (val) =>
           set((s) => {
             s.stash.log = val;
