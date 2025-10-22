@@ -9,6 +9,7 @@ export const RecordButton = () => {
   const setIsRecording = stores.recording.useStore(
     (s) => s.action.setIsRecording,
   );
+  const appendLog = stores.connect.useStore((s) => s.action.appendLog);
 
   useEffect(() => {
     const fetchRecordingStatus = async () => {
@@ -25,14 +26,14 @@ export const RecordButton = () => {
       if (outputActive) {
         await obs.call("StopRecord");
         setIsRecording(false);
-        console.log("Recording stopped");
+        appendLog("Recording stopped");
       } else {
         await obs.call("StartRecord");
         setIsRecording(true);
-        console.log("Recording started");
+        appendLog("Recording started");
       }
     } catch (error) {
-      console.error("Toggle failed:", error);
+      appendLog(`Toggle failed: ${error}`);
     }
   }
 
