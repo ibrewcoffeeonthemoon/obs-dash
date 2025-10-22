@@ -55,3 +55,22 @@
    If mismatch, use `pnpx expo install <package>` to install or update it to the correct version.
 
    If all packages version match, build should be successful, the apk file is emitted at project root.
+
+## Clear text traffic
+
+On Android, as of API Level 28, clear text traffic is blocked by default. This behaviour can be overridden by setting android:usesCleartextTraffic in the app manifest file.
+
+On Expo app, this has to be done by using `expo-build-properties`, and explicit setting `usesCleartextTraffic` to true in `app.json`
+
+```json
+"plugins": [
+  [
+    "expo-build-properties",
+    {
+      "android": {
+        "usesCleartextTraffic": true
+      }
+    }
+  ]
+]
+```
