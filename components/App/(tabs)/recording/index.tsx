@@ -2,8 +2,11 @@ import { ThemedView } from "@/components/themed-view";
 import { Banner } from "./Banner";
 import { RecordingTime } from "./RecordingTime";
 import { RecordButton } from "./RecordButton";
+import { stores } from "@/store";
 
 export default function Recording() {
+  const isConnected = stores.connect.useStore((s) => s.stash.isConnected);
+
   return (
     <>
       <Banner />
@@ -14,8 +17,12 @@ export default function Recording() {
           gap: 16,
         }}
       >
-        <RecordingTime />
-        <RecordButton />
+        {isConnected && (
+          <>
+            <RecordingTime />
+            <RecordButton />
+          </>
+        )}
       </ThemedView>
     </>
   );
