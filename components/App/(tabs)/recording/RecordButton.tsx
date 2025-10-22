@@ -1,6 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { obs } from "@/lib/obs";
 import { stores } from "@/store";
+import { useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 export const RecordButton = () => {
@@ -8,6 +9,14 @@ export const RecordButton = () => {
   const setIsRecording = stores.recording.useStore(
     (s) => s.action.setIsRecording,
   );
+
+  useEffect(() => {
+    const fetchRecordingStatus = async () => {
+      const { outputActive } = await obs.call("GetRecordStatus");
+      setIsRecording(outputActive);
+    };
+    fetchRecordingStatus();
+  }, []);
 
   async function toggleRecording() {
     try {
