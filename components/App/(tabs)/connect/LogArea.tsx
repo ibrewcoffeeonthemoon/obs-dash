@@ -19,7 +19,9 @@ export const LogArea = () => {
         <ThemedTextInput value={log} multiline editable={false} scrollEnabled />
       </ScrollView>
       <TouchableOpacity onPress={clearLog}>
-        <ThemedText>Clear</ThemedText>
+        <ThemedText style={{ textAlign: "right", color: "#ff7777" }}>
+          Clear
+        </ThemedText>
       </TouchableOpacity>
     </>
   );

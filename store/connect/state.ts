@@ -7,6 +7,7 @@ export const STATE = {
 export const STASH = {
   showPassword: false,
   log: "",
+  isConnected: false,
 };
 
 export type State = {
