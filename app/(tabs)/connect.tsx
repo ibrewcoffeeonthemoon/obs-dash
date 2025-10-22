@@ -36,12 +36,13 @@ const styles = StyleSheet.create({
 export default function Connect() {
   const [ipAddress, setIpAddress] = useState("192.168.1.99");
   const [port, setPort] = useState("4455");
+  const [password, setPassword] = useState("M7B4kY415rGdnslb");
   const [response, setResponse] = useState("---");
 
   const connectOBS = async () => {
     try {
       setResponse("Connecting...");
-      await obs.connect(`ws://${ipAddress}:${port}`, "M7B4kY415rGdnslb");
+      await obs.connect(`ws://${ipAddress}:${port}`, password);
       setResponse("Connected to OBS");
     } catch (error) {
       setResponse("Failed to connect to OBS");
@@ -83,6 +84,17 @@ export default function Connect() {
           onChangeText={setPort}
           placeholder="Enter Port"
           keyboardType="numeric"
+        />
+      </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Password</ThemedText>
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Enter Password"
+          secureTextEntry
         />
       </ThemedView>
 
