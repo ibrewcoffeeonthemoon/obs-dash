@@ -22,7 +22,7 @@ export default function TabLayout() {
         options={{
           title: "Connect",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+            <IconSymbol size={28} name="wifi.circle.fill" color={color} />
           ),
         }}
       />
