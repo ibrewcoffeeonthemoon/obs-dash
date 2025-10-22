@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { createSelectors } from "@/store/utils";
 import { stash, state, State } from "./state";
 import { Action } from "./action";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Store = State & Action;
 
@@ -47,6 +48,7 @@ export const useStore = create<Store>()(
     {
       name: "store.connect",
       partialize: (s) => ({ state: s.state }),
+      storage: createJSONStorage(() => AsyncStorage),
     },
   ),
 );
