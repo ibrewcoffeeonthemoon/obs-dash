@@ -16,7 +16,6 @@ export default function Recording() {
           gap: 16,
         }}
       >
-        <Title />
         <RecordingTime />
         <RecordButton />
         <ThemedText type="subtitle">Start/Pause/Stop button</ThemedText>
