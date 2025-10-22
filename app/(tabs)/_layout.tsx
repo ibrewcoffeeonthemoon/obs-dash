@@ -18,7 +18,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="connect"
+        name="index"
         options={{
           title: "Connect",
           tabBarIcon: ({ color }) => (
