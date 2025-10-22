@@ -3,9 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { styles as otherStyles } from "./styles";
 import { ThemedText } from "@/components/themed-text";
 import { useStore } from "@/store/connect";
-import { OBSWebSocket } from "obs-websocket-js";
-
-const obs = new OBSWebSocket();
+import { obs } from "@/lib/obs";
 
 export const ConnectButton = () => {
   const ipAddress = useStore((s) => s.state.ipAddress);
