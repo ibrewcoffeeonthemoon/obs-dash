@@ -16,7 +16,7 @@ export const PasswordInput = () => {
   const setShowPassword = useStore((s) => s.action.setShowPassword);
 
   return (
-    <ThemedView style={styles.stepContainer}>
+    <ThemedView style={{ gap: isPhone ? 3 : 8, marginBottom: isPhone ? 2 : 8 }}>
       <ThemedView
         style={{
           flexDirection: "row",

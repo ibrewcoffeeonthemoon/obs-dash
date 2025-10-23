@@ -11,7 +11,7 @@ export const PortInput = () => {
   const setPort = useStore((s) => s.action.setPort);
 
   return (
-    <ThemedView style={styles.stepContainer}>
+    <ThemedView style={{ gap: isPhone ? 3 : 8, marginBottom: isPhone ? 2 : 8 }}>
       <ThemedText type={isPhone ? "default" : "subtitle"}>Port</ThemedText>
       <ThemedTextInput
         style={styles.input}

@@ -11,7 +11,7 @@ export const IpAddressInput = () => {
   const setIpAddress = useStore((s) => s.action.setIpAddress);
 
   return (
-    <ThemedView style={styles.stepContainer}>
+    <ThemedView style={{ gap: isPhone ? 3 : 8, marginBottom: isPhone ? 2 : 8 }}>
       <ThemedText type={isPhone ? "default" : "subtitle"}>
         IP Address
       </ThemedText>
