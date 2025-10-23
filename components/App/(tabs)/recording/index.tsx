@@ -5,6 +5,7 @@ import { RecordButton } from "./RecordButton";
 import { stores } from "@/store";
 import { ThemedText } from "@/components/themed-text";
 import { KeepAwakeButton } from "./KeepAwakeButton";
+import { Title } from "./Title";
 
 export default function Recording() {
   const isConnected = stores.connect.useStore((s) => s.stash.isConnected);
@@ -21,6 +22,7 @@ export default function Recording() {
       >
         {isConnected ? (
           <>
+            <Title />
             <RecordingTime />
             <RecordButton />
             <KeepAwakeButton />
