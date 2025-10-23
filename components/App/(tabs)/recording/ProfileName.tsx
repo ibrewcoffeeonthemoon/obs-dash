@@ -31,31 +31,33 @@ export const ProfileName = () => {
   };
 
   return (
-    <>
-      <ThemedView
-        style={{ flexDirection: "row", justifyContent: "space-between" }}
-      >
-        <TouchableOpacity onPress={() => selectPreviousProfile()}>
-          <ThemedText>
-            <Ionicons name="chevron-back-circle-outline" size={30} />
-          </ThemedText>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => selectNextProfile()}>
-          <ThemedText>
-            <Ionicons name="chevron-forward-circle-outline" size={30} />
-          </ThemedText>
-        </TouchableOpacity>
-      </ThemedView>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type={isPhone ? "subtitle" : "title"}
-          style={{
-            fontFamily: Fonts.rounded,
-          }}
-        >
-          {profileName}
+    <ThemedView
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <TouchableOpacity onPress={() => selectPreviousProfile()}>
+        <ThemedText>
+          <Ionicons name="chevron-back-circle-outline" size={30} />
         </ThemedText>
-      </ThemedView>
-    </>
+      </TouchableOpacity>
+      <ThemedText
+        type={isPhone ? "subtitle" : "title"}
+        style={{
+          fontFamily: Fonts.rounded,
+          flex: 1,
+          textAlign: "center",
+        }}
+      >
+        {profileName}
+      </ThemedText>
+      <TouchableOpacity onPress={() => selectNextProfile()}>
+        <ThemedText>
+          <Ionicons name="chevron-forward-circle-outline" size={30} />
+        </ThemedText>
+      </TouchableOpacity>
+    </ThemedView>
   );
 };
