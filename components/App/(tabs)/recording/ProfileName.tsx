@@ -4,10 +4,20 @@ import { ThemedText } from "@/components/themed-text";
 import { Fonts } from "@/constants/theme";
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
+import { obs } from "@/lib/obs";
+import { TouchableOpacity } from "react-native";
 
 export const ProfileName = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
   const profileName = useStore((s) => s.stash.profileName);
+
+  const selectNextProfile = async () => {
+    const { currentProfileName, profiles } = await obs.call("GetProfileList");
+    const idx = profiles.indexOf(currentProfileName);
+    const newIdx = idx === profiles.length - 1 ? 0 : idx + 1;
+    const newProfileName = profiles[newIdx];
+    await obs.call("SetCurrentProfile", { profileName: newProfileName });
+  };
 
   return (
     <ThemedView style={styles.titleContainer}>
@@ -19,6 +29,9 @@ export const ProfileName = () => {
       >
         {profileName}
       </ThemedText>
+      <TouchableOpacity onPress={() => selectNextProfile()}>
+        <ThemedText>Next</ThemedText>
+      </TouchableOpacity>
     </ThemedView>
   );
 };
