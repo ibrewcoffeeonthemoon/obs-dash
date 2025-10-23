@@ -74,3 +74,7 @@ On Expo app, this has to be done by using `expo-build-properties`, and explicit 
   ]
 ]
 ```
+
+## Generate assets
+
+I used <https://expo-assets-generator.vercel.app/> to generate assets.
