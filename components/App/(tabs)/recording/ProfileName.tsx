@@ -11,6 +11,14 @@ export const ProfileName = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
   const profileName = useStore((s) => s.stash.profileName);
 
+  const selectPreviousProfile = async () => {
+    const { currentProfileName, profiles } = await obs.call("GetProfileList");
+    const idx = profiles.indexOf(currentProfileName);
+    const newIdx = idx === 0 ? profiles.length - 1 : idx - 1;
+    const newProfileName = profiles[newIdx];
+    await obs.call("SetCurrentProfile", { profileName: newProfileName });
+  };
+
   const selectNextProfile = async () => {
     const { currentProfileName, profiles } = await obs.call("GetProfileList");
     const idx = profiles.indexOf(currentProfileName);
@@ -29,6 +37,9 @@ export const ProfileName = () => {
       >
         {profileName}
       </ThemedText>
+      <TouchableOpacity onPress={() => selectPreviousProfile()}>
+        <ThemedText>Prev</ThemedText>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => selectNextProfile()}>
         <ThemedText>Next</ThemedText>
       </TouchableOpacity>
