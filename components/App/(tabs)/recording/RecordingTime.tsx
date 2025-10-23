@@ -46,7 +46,7 @@ export const RecordingTime = () => {
 
     // Cleanup interval on unmount or when isRecording changes
     return () => clearInterval(interval);
-  }, [isRecording]); // Re-run effect when isRecording changes
+  }, [isRecording, setRecordingTime]); // Re-run effect when isRecording changes
 
   return (
     <ThemedView

@@ -17,7 +17,7 @@ export const RecordButton = () => {
       setIsRecording(outputActive);
     };
     fetchRecordingStatus();
-  }, []);
+  }, [setIsRecording]);
 
   async function toggleRecording() {
     try {
