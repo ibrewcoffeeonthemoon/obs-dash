@@ -15,10 +15,8 @@ export const KeepAwakeButton = () => {
   useEffect(() => {
     if (isFocused && isRecording && isWakeLockEnabled) {
       activateKeepAwakeAsync();
-      console.log("activate");
     } else {
       deactivateKeepAwake();
-      console.log("deactivate");
     }
   }, [isFocused, isRecording, isWakeLockEnabled]);
 
