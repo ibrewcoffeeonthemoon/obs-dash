@@ -14,6 +14,10 @@ export const useStore = create<Store>()(
       state: state(),
       stash: stash(),
       action: {
+        setProfileName: (val) =>
+          set((s) => {
+            s.stash.profileName = val;
+          }),
         setIsRecording: (val) =>
           set((s) => {
             s.stash.isRecording = val;
