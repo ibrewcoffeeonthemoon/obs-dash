@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 export const RecordButton = () => {
+  const isPhone = stores.app.useStore((s) => s.stash.isPhone);
   const isRecording = stores.recording.useStore((s) => s.stash.isRecording);
   const setIsRecording = stores.recording.useStore(
     (s) => s.action.setIsRecording,
@@ -42,6 +43,7 @@ export const RecordButton = () => {
       style={{
         ...styles.button,
         backgroundColor: isRecording ? "red" : "green",
+        height: isPhone ? 240 : 350,
       }}
       onPress={() => toggleRecording()}
     >
@@ -60,7 +62,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 5,
-    height: 300,
   },
   buttonText: {
     color: "white",
