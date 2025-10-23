@@ -4,7 +4,7 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 
 export const Banner = () => {
   return (
-    <ThemedView style={{ ...styles.titleContainer, height: 150 }}>
+    <ThemedView style={{ ...styles.titleContainer, height: 125 }}>
       <IconSymbol
         size={310}
         color="#808080"

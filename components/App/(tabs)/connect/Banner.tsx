@@ -4,7 +4,7 @@ import { styles } from "./styles";
 
 export const Banner = () => {
   return (
-    <ThemedView style={{ ...styles.titleContainer, height: 150 }}>
+    <ThemedView style={{ ...styles.titleContainer, height: 125 }}>
       <Image
         source={require("@/assets/images/partial-react-logo.png")}
         style={styles.reactLogo}
