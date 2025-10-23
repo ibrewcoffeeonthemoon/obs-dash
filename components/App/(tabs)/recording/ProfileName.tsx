@@ -1,11 +1,10 @@
 import { ThemedView } from "@/components/themed-view";
-import { styles } from "./styles";
 import { ThemedText } from "@/components/themed-text";
 import { Fonts } from "@/constants/theme";
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
 import { obs } from "@/lib/obs";
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export const ProfileName = () => {
@@ -38,17 +37,26 @@ export const ProfileName = () => {
         alignItems: "center",
       }}
     >
-      <TouchableOpacity
+      <Pressable
         onPress={() => selectPreviousProfile()}
-        style={{ width: "100%" }}
+        style={({ pressed }) => [
+          {
+            width: "100%",
+            paddingVertical: 12,
+            borderRadius: 8,
+            backgroundColor: pressed
+              ? "rgba(100, 100, 100, 0.08)"
+              : "transparent",
+          },
+        ]}
       >
-        <ThemedText
-          type={isPhone ? "subtitle" : "title"}
-          style={{ textAlign: "center" }}
-        >
-          <Ionicons name="chevron-up" size={30} />
-        </ThemedText>
-      </TouchableOpacity>
+        <Ionicons
+          name="chevron-up"
+          size={30}
+          style={{ alignSelf: "center", color: "#666666" }}
+        />
+      </Pressable>
+
       <ThemedText
         type={isPhone ? "subtitle" : "title"}
         style={{
@@ -58,17 +66,26 @@ export const ProfileName = () => {
       >
         {profileName}
       </ThemedText>
-      <TouchableOpacity
+
+      <Pressable
         onPress={() => selectNextProfile()}
-        style={{ width: "100%" }}
+        style={({ pressed }) => [
+          {
+            width: "100%",
+            paddingVertical: 12,
+            borderRadius: 8,
+            backgroundColor: pressed
+              ? "rgba(100, 100, 100, 0.08)"
+              : "transparent",
+          },
+        ]}
       >
-        <ThemedText
-          type={isPhone ? "subtitle" : "title"}
-          style={{ textAlign: "center" }}
-        >
-          <Ionicons name="chevron-down" size={30} />
-        </ThemedText>
-      </TouchableOpacity>
+        <Ionicons
+          name="chevron-down"
+          size={30}
+          style={{ alignSelf: "center", color: "#666666" }}
+        />
+      </Pressable>
     </ThemedView>
   );
 };
