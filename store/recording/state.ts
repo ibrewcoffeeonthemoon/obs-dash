@@ -1,4 +1,6 @@
-export const STATE = {};
+export const STATE = {
+  isWakeLockEnabled: false,
+};
 
 export const STASH = {
   isRecording: false,

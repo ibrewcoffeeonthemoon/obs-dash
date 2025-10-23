@@ -22,6 +22,10 @@ export const useStore = create<Store>()(
           set((s) => {
             s.stash.recordingTime = val;
           }),
+        setIsWakeLockEnabled: (val) =>
+          set((s) => {
+            s.state.isWakeLockEnabled = val;
+          }),
       },
     })),
     {
