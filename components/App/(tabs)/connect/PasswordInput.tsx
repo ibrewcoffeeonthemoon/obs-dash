@@ -28,7 +28,9 @@ export const PasswordInput = () => {
           Password
         </ThemedText>
         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <ThemedText>{showPassword ? "hide" : "show"}</ThemedText>
+          <ThemedText style={{ color: "#6699aa" }}>
+            {showPassword ? "hide" : "show"}
+          </ThemedText>
         </TouchableOpacity>
       </ThemedView>
       <ThemedTextInput
