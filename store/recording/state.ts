@@ -1,5 +1,5 @@
 export const STATE = {
-  isWakeLockEnabled: false,
+  isWakeLockEnabled: true,
 };
 
 export const STASH = {
