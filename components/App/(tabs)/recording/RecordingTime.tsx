@@ -52,7 +52,7 @@ export const RecordingTime = () => {
     <ThemedView
       style={{
         paddingHorizontal: 10,
-        paddingVertical: 50,
+        paddingVertical: 20,
       }}
     >
       <ThemedText
