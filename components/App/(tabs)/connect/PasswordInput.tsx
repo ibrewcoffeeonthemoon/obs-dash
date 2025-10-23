@@ -4,8 +4,11 @@ import { ThemedText } from "@/components/themed-text";
 import { TouchableOpacity } from "react-native";
 import { ThemedTextInput } from "@/components/themed-textinput";
 import { useStore } from "@/store/connect";
+import { stores } from "@/store";
 
 export const PasswordInput = () => {
+  const isPhone = stores.app.useStore((s) => s.stash.isPhone);
+
   const password = useStore((s) => s.state.password);
   const setPassword = useStore((s) => s.action.setPassword);
 
@@ -21,7 +24,9 @@ export const PasswordInput = () => {
           alignItems: "center",
         }}
       >
-        <ThemedText type="subtitle">Password</ThemedText>
+        <ThemedText type={isPhone ? "default" : "subtitle"}>
+          Password
+        </ThemedText>
         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
           <ThemedText>{showPassword ? "hide" : "show"}</ThemedText>
         </TouchableOpacity>
