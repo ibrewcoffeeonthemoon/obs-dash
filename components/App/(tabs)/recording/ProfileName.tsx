@@ -5,7 +5,7 @@ import { Fonts } from "@/constants/theme";
 import { useEffect, useState } from "react";
 import { obs } from "@/lib/obs";
 
-export const Title = () => {
+export const ProfileName = () => {
   const [profileName, setProfileName] = useState("--");
 
   useEffect(() => {
