@@ -6,6 +6,7 @@ import { stores } from "@/store";
 import { useStore } from "@/store/recording";
 import { obs } from "@/lib/obs";
 import { TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export const ProfileName = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -28,21 +29,31 @@ export const ProfileName = () => {
   };
 
   return (
-    <ThemedView style={styles.titleContainer}>
-      <ThemedText
-        type={isPhone ? "subtitle" : "title"}
-        style={{
-          fontFamily: Fonts.rounded,
-        }}
+    <>
+      <ThemedView
+        style={{ flexDirection: "row", justifyContent: "space-between" }}
       >
-        {profileName}
-      </ThemedText>
-      <TouchableOpacity onPress={() => selectPreviousProfile()}>
-        <ThemedText>Prev</ThemedText>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => selectNextProfile()}>
-        <ThemedText>Next</ThemedText>
-      </TouchableOpacity>
-    </ThemedView>
+        <TouchableOpacity onPress={() => selectPreviousProfile()}>
+          <ThemedText>
+            <Ionicons name="chevron-back-circle-outline" size={30} />
+          </ThemedText>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => selectNextProfile()}>
+          <ThemedText>
+            <Ionicons name="chevron-forward-circle-outline" size={30} />
+          </ThemedText>
+        </TouchableOpacity>
+      </ThemedView>
+      <ThemedView style={styles.titleContainer}>
+        <ThemedText
+          type={isPhone ? "subtitle" : "title"}
+          style={{
+            fontFamily: Fonts.rounded,
+          }}
+        >
+          {profileName}
+        </ThemedText>
+      </ThemedView>
+    </>
   );
 };
