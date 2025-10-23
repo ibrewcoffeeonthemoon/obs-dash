@@ -3,6 +3,7 @@ export const STATE = {
 };
 
 export const STASH = {
+  profileName: "--",
   isRecording: false,
   recordingTime: "00:00",
 };
