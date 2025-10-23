@@ -3,8 +3,11 @@ import { ThemedView } from "@/components/themed-view";
 import { obs } from "@/lib/obs";
 import { useStore } from "@/store/recording";
 import { useEffect, useState } from "react";
+import { Dimensions } from "react-native";
 
 export const RecordingTime = () => {
+  const { width } = Dimensions.get("window");
+  const isPhone = width < 600;
   const isRecording = useStore((s) => s.stash.isRecording);
   const recordingTime = useStore((s) => s.stash.recordingTime);
   const setRecordingTime = useStore((s) => s.action.setRecordingTime);
@@ -48,6 +51,16 @@ export const RecordingTime = () => {
     return () => clearInterval(interval);
   }, [isRecording, setRecordingTime]); // Re-run effect when isRecording changes
 
+  const fontSize = () => {
+    if (isPhone) {
+      return showHours ? 75 : 120;
+    } else {
+      return showHours ? 120 : 200;
+    }
+  };
+
+  const lineHeight = () => (isPhone ? 100 : 200);
+
   return (
     <ThemedView
       style={{
@@ -57,8 +70,8 @@ export const RecordingTime = () => {
     >
       <ThemedText
         style={{
-          fontSize: showHours ? 120 : 200,
-          lineHeight: 200,
+          fontSize: fontSize(),
+          lineHeight: lineHeight(),
           textAlign: "center",
         }}
       >
