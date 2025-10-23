@@ -17,6 +17,9 @@ export const ConnectButton = () => {
   const setIsRecording = stores.recording.useStore(
     (s) => s.action.setIsRecording,
   );
+  const setProfileName = stores.recording.useStore(
+    (s) => s.action.setProfileName,
+  );
 
   const connectOBS = async () => {
     try {
@@ -36,6 +39,13 @@ export const ConnectButton = () => {
       setIsRecording(outputActive);
       obs.on("RecordStateChanged", ({ outputActive }) => {
         setIsRecording(outputActive);
+      });
+
+      // get and listen to profile name state
+      const { currentProfileName } = await obs.call("GetProfileList");
+      setProfileName(currentProfileName);
+      obs.on("CurrentProfileChanged", ({ profileName }) => {
+        setProfileName(profileName);
       });
     } catch (error) {
       if (error instanceof OBSWebSocketError) {
