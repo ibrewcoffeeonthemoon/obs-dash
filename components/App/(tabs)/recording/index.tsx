@@ -4,6 +4,7 @@ import { RecordingTime } from "./RecordingTime";
 import { RecordButton } from "./RecordButton";
 import { stores } from "@/store";
 import { ThemedText } from "@/components/themed-text";
+import { KeepAwakeButton } from "./KeepAwakeButton";
 
 export default function Recording() {
   const isConnected = stores.connect.useStore((s) => s.stash.isConnected);
@@ -22,6 +23,7 @@ export default function Recording() {
           <>
             <RecordingTime />
             <RecordButton />
+            <KeepAwakeButton />
           </>
         ) : (
           <ThemedText type="title">Please connect to OBS first.</ThemedText>
