@@ -4,8 +4,11 @@ import { ThemedText } from "@/components/themed-text";
 import { TouchableOpacity } from "react-native";
 import { ThemedTextInput } from "@/components/themed-textinput";
 import { useStore } from "@/store/connect";
+import { stores } from "@/store";
 
 export const PasswordInput = () => {
+  const isPhone = stores.app.useStore((s) => s.stash.isPhone);
+
   const password = useStore((s) => s.state.password);
   const setPassword = useStore((s) => s.action.setPassword);
 
@@ -13,7 +16,7 @@ export const PasswordInput = () => {
   const setShowPassword = useStore((s) => s.action.setShowPassword);
 
   return (
-    <ThemedView style={styles.stepContainer}>
+    <ThemedView style={{ gap: isPhone ? 3 : 8, marginBottom: isPhone ? 2 : 8 }}>
       <ThemedView
         style={{
           flexDirection: "row",
@@ -21,9 +24,13 @@ export const PasswordInput = () => {
           alignItems: "center",
         }}
       >
-        <ThemedText type="subtitle">Password</ThemedText>
+        <ThemedText type={isPhone ? "default" : "subtitle"}>
+          Password
+        </ThemedText>
         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <ThemedText>{showPassword ? "hide" : "show"}</ThemedText>
+          <ThemedText style={{ color: "#6699aa" }}>
+            {showPassword ? "hide" : "show"}
+          </ThemedText>
         </TouchableOpacity>
       </ThemedView>
       <ThemedTextInput

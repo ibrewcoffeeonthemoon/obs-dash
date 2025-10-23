@@ -50,7 +50,7 @@ export const ConnectButton = () => {
   };
 
   return (
-    <ThemedView style={styles.stepContainer}>
+    <ThemedView>
       {!isConnected ? (
         <TouchableOpacity
           style={{ ...styles.button, backgroundColor: "green" }}
@@ -72,11 +72,10 @@ export const ConnectButton = () => {
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 5,
     alignItems: "center",
-    marginVertical: 5,
   },
   buttonText: {
     color: "white",

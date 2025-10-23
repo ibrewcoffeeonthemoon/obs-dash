@@ -4,8 +4,10 @@ import { ThemedText } from "@/components/themed-text";
 import { Fonts } from "@/constants/theme";
 import { useEffect, useState } from "react";
 import { obs } from "@/lib/obs";
+import { stores } from "@/store";
 
 export const ProfileName = () => {
+  const isPhone = stores.app.useStore((s) => s.stash.isPhone);
   const [profileName, setProfileName] = useState("--");
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export const ProfileName = () => {
   return (
     <ThemedView style={styles.titleContainer}>
       <ThemedText
-        type="title"
+        type={isPhone ? "subtitle" : "title"}
         style={{
           fontFamily: Fonts.rounded,
         }}

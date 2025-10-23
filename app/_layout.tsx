@@ -10,6 +10,8 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useEffect } from "react";
 import { deactivateKeepAwake } from "expo-keep-awake";
+import { useStore } from "@/store/app";
+import { Dimensions } from "react-native";
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -17,8 +19,14 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const setIsPhone = useStore((s) => s.action.setIsPhone);
 
   useEffect(() => {
+    // decide is phone or not by screen width
+    const { width } = Dimensions.get("window");
+    setIsPhone(width < 600);
+
+    // disable keep awake on app launch
     deactivateKeepAwake();
   }, []);
 
