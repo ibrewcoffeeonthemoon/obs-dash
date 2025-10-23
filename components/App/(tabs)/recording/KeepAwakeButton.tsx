@@ -8,22 +8,21 @@ import { Switch } from "react-native";
 
 export const KeepAwakeButton = () => {
   const isFocused = useIsFocused();
-  const isRecording = useStore((s) => s.stash.isRecording);
   const isWakeLockEnabled = useStore((s) => s.state.isWakeLockEnabled);
   const setIsWakeLockEnabled = useStore((s) => s.action.setIsWakeLockEnabled);
 
   useEffect(() => {
-    if (isFocused && isRecording && isWakeLockEnabled) {
+    if (isFocused && isWakeLockEnabled) {
       activateKeepAwakeAsync();
     } else {
       deactivateKeepAwake();
     }
-  }, [isFocused, isRecording, isWakeLockEnabled]);
+  }, [isFocused, isWakeLockEnabled]);
 
   return (
     <ThemedView style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
       <Switch value={isWakeLockEnabled} onValueChange={setIsWakeLockEnabled} />
-      <ThemedText>Keep screen awake during recording</ThemedText>
+      <ThemedText>Keep screen awake</ThemedText>
     </ThemedView>
   );
 };
