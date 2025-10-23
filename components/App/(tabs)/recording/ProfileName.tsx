@@ -33,29 +33,40 @@ export const ProfileName = () => {
   return (
     <ThemedView
       style={{
-        flexDirection: "row",
+        flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
       }}
     >
-      <TouchableOpacity onPress={() => selectPreviousProfile()}>
-        <ThemedText>
-          <Ionicons name="chevron-back-circle-outline" size={30} />
+      <TouchableOpacity
+        onPress={() => selectPreviousProfile()}
+        style={{ width: "100%" }}
+      >
+        <ThemedText
+          type={isPhone ? "subtitle" : "title"}
+          style={{ textAlign: "center" }}
+        >
+          <Ionicons name="chevron-up" size={30} />
         </ThemedText>
       </TouchableOpacity>
       <ThemedText
         type={isPhone ? "subtitle" : "title"}
         style={{
           fontFamily: Fonts.rounded,
-          flex: 1,
           textAlign: "center",
         }}
       >
         {profileName}
       </ThemedText>
-      <TouchableOpacity onPress={() => selectNextProfile()}>
-        <ThemedText>
-          <Ionicons name="chevron-forward-circle-outline" size={30} />
+      <TouchableOpacity
+        onPress={() => selectNextProfile()}
+        style={{ width: "100%" }}
+      >
+        <ThemedText
+          type={isPhone ? "subtitle" : "title"}
+          style={{ textAlign: "center" }}
+        >
+          <Ionicons name="chevron-down" size={30} />
         </ThemedText>
       </TouchableOpacity>
     </ThemedView>
