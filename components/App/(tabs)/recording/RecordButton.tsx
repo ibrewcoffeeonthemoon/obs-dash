@@ -7,31 +7,18 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 export const RecordButton = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
   const isRecording = stores.recording.useStore((s) => s.stash.isRecording);
-  const setIsRecording = stores.recording.useStore(
-    (s) => s.action.setIsRecording,
-  );
   const appendLog = stores.connect.useStore((s) => s.action.appendLog);
 
   useEffect(() => {
-    const fetchRecordingStatus = async () => {
-      const { outputActive } = await obs.call("GetRecordStatus");
-      setIsRecording(outputActive);
-    };
-    fetchRecordingStatus();
-  }, [setIsRecording]);
+    appendLog(`Recording ${isRecording ? "started" : "stopped"}`);
+  }, [isRecording]);
 
   async function toggleRecording() {
     try {
-      const { outputActive } = await obs.call("GetRecordStatus");
-
-      if (outputActive) {
+      if (isRecording) {
         await obs.call("StopRecord");
-        setIsRecording(false);
-        appendLog("Recording stopped");
       } else {
         await obs.call("StartRecord");
-        setIsRecording(true);
-        appendLog("Recording started");
       }
     } catch (error) {
       appendLog(`Toggle failed: ${error}`);
