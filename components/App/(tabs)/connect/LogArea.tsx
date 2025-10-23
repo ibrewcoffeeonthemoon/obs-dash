@@ -15,8 +15,20 @@ export const LogArea = () => {
 
   return (
     <>
-      <ScrollView ref={scrollViewRef} style={{ overflow: "scroll" }}>
-        <ThemedTextInput value={log} multiline editable={false} scrollEnabled />
+      <ScrollView
+        ref={scrollViewRef}
+        style={{ borderColor: "gray", borderWidth: 1 }}
+      >
+        <ScrollView horizontal={true}>
+          <ThemedTextInput
+            value={log}
+            multiline
+            editable={false}
+            style={{
+              fontFamily: "monospace",
+            }}
+          />
+        </ScrollView>
       </ScrollView>
       <TouchableOpacity onPress={clearLog}>
         <ThemedText style={{ textAlign: "right", color: "#ff7777" }}>
