@@ -11,7 +11,7 @@ export const RecordButton = () => {
 
   useEffect(() => {
     appendLog(`Recording ${isRecording ? "started" : "stopped"}`);
-  }, [isRecording]);
+  }, [isRecording, appendLog]);
 
   async function toggleRecording() {
     try {

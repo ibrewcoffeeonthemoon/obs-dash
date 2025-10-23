@@ -28,7 +28,7 @@ export default function RootLayout() {
 
     // disable keep awake on app launch
     deactivateKeepAwake();
-  }, []);
+  }, [setIsPhone]);
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
