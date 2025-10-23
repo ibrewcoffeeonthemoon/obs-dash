@@ -15,17 +15,19 @@ export const ProfileName = () => {
   const selectPreviousProfile = async () => {
     const { currentProfileName, profiles } = await obs.call("GetProfileList");
     const idx = profiles.indexOf(currentProfileName);
-    const newIdx = idx === 0 ? profiles.length - 1 : idx - 1;
-    const newProfileName = profiles[newIdx];
-    await obs.call("SetCurrentProfile", { profileName: newProfileName });
+    if (idx > 0) {
+      const newProfileName = profiles[idx - 1];
+      await obs.call("SetCurrentProfile", { profileName: newProfileName });
+    }
   };
 
   const selectNextProfile = async () => {
     const { currentProfileName, profiles } = await obs.call("GetProfileList");
     const idx = profiles.indexOf(currentProfileName);
-    const newIdx = idx === profiles.length - 1 ? 0 : idx + 1;
-    const newProfileName = profiles[newIdx];
-    await obs.call("SetCurrentProfile", { profileName: newProfileName });
+    if (idx < profiles.length - 1) {
+      const newProfileName = profiles[idx + 1];
+      await obs.call("SetCurrentProfile", { profileName: newProfileName });
+    }
   };
 
   return (
