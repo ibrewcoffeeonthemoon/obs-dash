@@ -30,7 +30,7 @@ export const RecordButton = () => {
       style={{
         ...styles.button,
         backgroundColor: isRecording ? "red" : "green",
-        height: isPhone ? 240 : 350,
+        height: isPhone ? 240 : 300,
       }}
       onPress={() => toggleRecording()}
     >
