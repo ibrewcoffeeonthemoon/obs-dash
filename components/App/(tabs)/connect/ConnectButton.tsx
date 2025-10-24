@@ -1,5 +1,4 @@
-import { ThemedView } from "@/components/themed-view";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useStore } from "@/store/connect";
 import { obs } from "@/lib/obs";
 import { OBSWebSocketError } from "obs-websocket-js";
@@ -70,7 +69,7 @@ export const ConnectButton = () => {
   };
 
   return (
-    <ThemedView>
+    <View>
       {!isConnected ? (
         <TouchableOpacity
           className="py-4 px-5 rounded-md items-center bg-green-700"
@@ -86,6 +85,6 @@ export const ConnectButton = () => {
           <Text className="text-white text-xl font-extrabold">Disconnect</Text>
         </TouchableOpacity>
       )}
-    </ThemedView>
+    </View>
   );
 };
