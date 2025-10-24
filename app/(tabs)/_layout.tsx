@@ -1,8 +1,7 @@
 import { Tabs } from "expo-router";
 import React from "react";
-
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { HapticTab } from "@/components/haptic-tab";
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
@@ -22,7 +21,7 @@ export default function TabLayout() {
         options={{
           title: "Connect",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="wifi.circle.fill" color={color} />
+            <MaterialIcons size={28} name="wifi" color={color} />
           ),
         }}
       />
@@ -31,7 +30,7 @@ export default function TabLayout() {
         options={{
           title: "Recording",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="record.circle.fill" color={color} />
+            <MaterialIcons size={28} name="fiber-manual-record" color={color} />
           ),
         }}
       />
