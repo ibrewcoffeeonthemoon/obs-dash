@@ -3,9 +3,9 @@ import { Banner } from "./Banner";
 import { RecordingTime } from "./RecordingTime";
 import { RecordButton } from "./RecordButton";
 import { stores } from "@/store";
-import { ThemedText } from "@/components/themed-text";
 import { KeepAwakeButton } from "./KeepAwakeButton";
 import { ProfileName } from "./ProfileName";
+import { Text } from "react-native";
 
 export default function Recording() {
   const isConnected = stores.connect.useStore((s) => s.stash.isConnected);
@@ -28,7 +28,9 @@ export default function Recording() {
             <KeepAwakeButton />
           </>
         ) : (
-          <ThemedText type="title">Please connect to OBS first.</ThemedText>
+          <Text className="text-red-400 text-4xl font-bold">
+            Please connect to OBS first.
+          </Text>
         )}
       </ThemedView>
     </>
