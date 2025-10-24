@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   reactLogo: {
-    height: 178,
+    height: 200,
     width: 290,
     bottom: 0,
     left: 0,
