@@ -27,11 +27,11 @@ export const RecordButton = () => {
 
   return (
     <TouchableOpacity
-      style={{
-        ...styles.button,
-        backgroundColor: isRecording ? "red" : "green",
-        height: isPhone ? 240 : 300,
-      }}
+      className={`
+        py-12 px-12 rounded-xl items-center justify-center my-1 
+        ${isRecording ? "bg-red-700" : "bg-green-700"} 
+        ${isPhone ? "h-72" : "h-80"}
+      `}
       onPress={() => toggleRecording()}
     >
       <ThemedText style={styles.buttonText}>
