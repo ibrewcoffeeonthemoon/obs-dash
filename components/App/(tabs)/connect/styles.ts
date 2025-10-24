@@ -8,10 +8,4 @@ export const styles = StyleSheet.create({
     left: 0,
     position: "absolute",
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 8,
-    borderRadius: 4,
-  },
 });
