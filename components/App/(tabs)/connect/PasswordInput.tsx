@@ -1,5 +1,4 @@
 import { ThemedView } from "@/components/themed-view";
-import { ThemedText } from "@/components/themed-text";
 import { Text, TextInput, TouchableOpacity } from "react-native";
 import { useStore } from "@/store/connect";
 import { stores } from "@/store";
@@ -28,9 +27,9 @@ export const PasswordInput = () => {
           Password
         </Text>
         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <ThemedText style={{ color: "#6699aa" }}>
+          <Text className="text-cyan-500">
             {showPassword ? "hide" : "show"}
-          </ThemedText>
+          </Text>
         </TouchableOpacity>
       </ThemedView>
       <TextInput
