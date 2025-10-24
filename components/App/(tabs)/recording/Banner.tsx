@@ -1,17 +1,16 @@
-import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Image } from "expo-image";
 import { View } from "react-native";
 
 export const Banner = () => {
   return (
     <View className="flex-row gap-2 h-[65px]">
-      <IconSymbol
-        size={310}
-        color="#808080"
-        name="chevron.left.forwardslash.chevron.right"
+      <Image
+        source={require("@/assets/images/partial-react-logo.png")}
         style={{
-          color: "#808080",
-          bottom: -90,
-          left: -35,
+          height: 200,
+          width: 290,
+          bottom: 0,
+          left: 0,
           position: "absolute",
         }}
       />
