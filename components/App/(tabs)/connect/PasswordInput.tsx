@@ -1,8 +1,6 @@
 import { ThemedView } from "@/components/themed-view";
-import { styles } from "./styles";
 import { ThemedText } from "@/components/themed-text";
-import { TouchableOpacity } from "react-native";
-import { ThemedTextInput } from "@/components/themed-textinput";
+import { TextInput, TouchableOpacity } from "react-native";
 import { useStore } from "@/store/connect";
 import { stores } from "@/store";
 
@@ -33,8 +31,8 @@ export const PasswordInput = () => {
           </ThemedText>
         </TouchableOpacity>
       </ThemedView>
-      <ThemedTextInput
-        style={styles.input}
+      <TextInput
+        className="text-white border border-[#ccc] p-2 rounded"
         value={password}
         onChangeText={setPassword}
         placeholder="Enter Password"

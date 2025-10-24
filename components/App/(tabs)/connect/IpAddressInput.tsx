@@ -1,9 +1,8 @@
 import { ThemedView } from "@/components/themed-view";
-import { styles } from "./styles";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedTextInput } from "@/components/themed-textinput";
 import { useStore } from "@/store/connect";
 import { stores } from "@/store";
+import { TextInput } from "react-native";
 
 export const IpAddressInput = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -15,8 +14,8 @@ export const IpAddressInput = () => {
       <ThemedText type={isPhone ? "default" : "subtitle"}>
         IP Address
       </ThemedText>
-      <ThemedTextInput
-        style={styles.input}
+      <TextInput
+        className="text-white border border-[#ccc] p-2 rounded"
         value={ipAddress}
         onChangeText={setIpAddress}
         placeholder="Enter IP Address"
