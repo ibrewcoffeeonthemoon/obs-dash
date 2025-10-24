@@ -1,9 +1,9 @@
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { obs } from "@/lib/obs";
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
 import { useEffect, useState } from "react";
+import { Text, View } from "react-native";
 
 export const RecordingTime = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -61,11 +61,7 @@ export const RecordingTime = () => {
   const lineHeight = () => (isPhone ? 100 : 200);
 
   return (
-    <ThemedView
-      style={{
-        paddingVertical: 20,
-      }}
-    >
+    <View className="pb-2">
       <ThemedText
         style={{
           fontSize: fontSize(),
@@ -75,6 +71,6 @@ export const RecordingTime = () => {
       >
         {recordingTime}
       </ThemedText>
-    </ThemedView>
+    </View>
   );
 };
