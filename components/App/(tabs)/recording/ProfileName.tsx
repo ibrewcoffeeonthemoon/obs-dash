@@ -1,8 +1,7 @@
-import { ThemedView } from "@/components/themed-view";
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
 import { obs } from "@/lib/obs";
-import { Text, Pressable } from "react-native";
+import { Text, Pressable, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export const ProfileName = () => {
@@ -28,13 +27,7 @@ export const ProfileName = () => {
   };
 
   return (
-    <ThemedView
-      style={{
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
+    <View className="flex flex-col justify-between items-center">
       <Pressable
         onPress={() => selectPreviousProfile()}
         style={({ pressed }) => [
@@ -80,6 +73,6 @@ export const ProfileName = () => {
           style={{ alignSelf: "center", color: "#666666" }}
         />
       </Pressable>
-    </ThemedView>
+    </View>
   );
 };
