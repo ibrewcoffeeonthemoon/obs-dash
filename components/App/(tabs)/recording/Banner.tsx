@@ -1,4 +1,3 @@
-import { styles } from "./styles";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { View } from "react-native";
 
@@ -9,7 +8,12 @@ export const Banner = () => {
         size={310}
         color="#808080"
         name="chevron.left.forwardslash.chevron.right"
-        style={styles.headerImage}
+        style={{
+          color: "#808080",
+          bottom: -90,
+          left: -35,
+          position: "absolute",
+        }}
       />
     </View>
   );

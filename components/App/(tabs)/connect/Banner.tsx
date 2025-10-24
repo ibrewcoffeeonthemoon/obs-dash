@@ -1,5 +1,4 @@
 import { Image } from "expo-image";
-import { styles } from "./styles";
 import { stores } from "@/store";
 import { View } from "react-native";
 
@@ -12,7 +11,13 @@ export const Banner = () => {
     >
       <Image
         source={require("@/assets/images/partial-react-logo.png")}
-        style={styles.reactLogo}
+        style={{
+          height: 200,
+          width: 290,
+          bottom: 0,
+          left: 0,
+          position: "absolute",
+        }}
       />
     </View>
   );
