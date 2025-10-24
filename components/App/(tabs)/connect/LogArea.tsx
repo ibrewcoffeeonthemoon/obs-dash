@@ -1,9 +1,7 @@
-import { ThemedText } from "@/components/themed-text";
-import { ThemedTextInput } from "@/components/themed-textinput";
 import { stores } from "@/store";
 import { useStore } from "@/store/connect";
 import { useEffect, useRef } from "react";
-import { ScrollView, TouchableOpacity } from "react-native";
+import { Text, ScrollView, TextInput, TouchableOpacity } from "react-native";
 
 export const LogArea = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -22,21 +20,16 @@ export const LogArea = () => {
         style={{ borderColor: "gray", borderWidth: 1 }}
       >
         <ScrollView horizontal={true}>
-          <ThemedTextInput
+          <TextInput
             value={log}
             multiline
             editable={false}
-            style={{
-              fontFamily: "monospace",
-              fontSize: isPhone ? 11 : 14,
-            }}
+            className={`text-white font-mono ${isPhone ? "text-sm" : "text-md"}`}
           />
         </ScrollView>
       </ScrollView>
       <TouchableOpacity onPress={clearLog}>
-        <ThemedText style={{ textAlign: "right", color: "#ff7777" }}>
-          Clear
-        </ThemedText>
+        <Text className="text-right text-pink-700 pr-2">Clear</Text>
       </TouchableOpacity>
     </>
   );

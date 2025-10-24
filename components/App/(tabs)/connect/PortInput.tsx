@@ -1,9 +1,6 @@
-import { ThemedView } from "@/components/themed-view";
-import { styles } from "./styles";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedTextInput } from "@/components/themed-textinput";
 import { useStore } from "@/store/connect";
 import { stores } from "@/store";
+import { Text, TextInput, View } from "react-native";
 
 export const PortInput = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -11,16 +8,20 @@ export const PortInput = () => {
   const setPort = useStore((s) => s.action.setPort);
 
   return (
-    <ThemedView style={{ gap: isPhone ? 3 : 8, marginBottom: isPhone ? 2 : 8 }}>
-      <ThemedText type={isPhone ? "default" : "subtitle"}>Port</ThemedText>
-      <ThemedTextInput
-        style={styles.input}
+    <View className={`flex ${isPhone ? "gap-[3px] mb-[2px]" : "gap-2 mb-2"}`}>
+      <Text
+        className={`text-white ${isPhone ? "text-md" : "text-xl"} font-bold`}
+      >
+        Port
+      </Text>
+      <TextInput
+        className="text-white border border-[#ccc] p-2 rounded"
         value={port}
         onChangeText={setPort}
         placeholder="Enter Port"
         keyboardType="numeric"
         selectTextOnFocus
       />
-    </ThemedView>
+    </View>
   );
 };

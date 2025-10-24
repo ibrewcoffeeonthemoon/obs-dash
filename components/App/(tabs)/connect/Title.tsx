@@ -1,16 +1,16 @@
-import { ThemedView } from "@/components/themed-view";
-import { styles } from "./styles";
-import { ThemedText } from "@/components/themed-text";
 import { stores } from "@/store";
+import { Text, View } from "react-native";
 
 export const Title = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
 
   return (
-    <ThemedView style={styles.titleContainer}>
-      <ThemedText type={isPhone ? "subtitle" : "title"}>
+    <View className="flex flex-row items-center g-2">
+      <Text
+        className={`text-white ${isPhone ? "text-2xl" : "text-4xl"} font-bold`}
+      >
         Connect To OBS Websocket
-      </ThemedText>
-    </ThemedView>
+      </Text>
+    </View>
   );
 };

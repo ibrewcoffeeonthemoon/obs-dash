@@ -1,9 +1,8 @@
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { obs } from "@/lib/obs";
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
 import { useEffect, useState } from "react";
+import { Text, View } from "react-native";
 
 export const RecordingTime = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -50,6 +49,7 @@ export const RecordingTime = () => {
     return () => clearInterval(interval);
   }, [isRecording, setRecordingTime]); // Re-run effect when isRecording changes
 
+  // custotm extra big font, no tailwindcss can fit
   const fontSize = () => {
     if (isPhone) {
       return showHours ? 75 : 120;
@@ -58,23 +58,16 @@ export const RecordingTime = () => {
     }
   };
 
-  const lineHeight = () => (isPhone ? 100 : 200);
-
   return (
-    <ThemedView
-      style={{
-        paddingVertical: 20,
-      }}
-    >
-      <ThemedText
+    <View className="pb-2">
+      <Text
         style={{
           fontSize: fontSize(),
-          lineHeight: lineHeight(),
-          textAlign: "center",
         }}
+        className="text-white text-center"
       >
         {recordingTime}
-      </ThemedText>
-    </ThemedView>
+      </Text>
+    </View>
   );
 };

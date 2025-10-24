@@ -1,9 +1,6 @@
-import { ThemedView } from "@/components/themed-view";
-import { styles } from "./styles";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedTextInput } from "@/components/themed-textinput";
 import { useStore } from "@/store/connect";
 import { stores } from "@/store";
+import { Text, TextInput, View } from "react-native";
 
 export const IpAddressInput = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -11,17 +8,19 @@ export const IpAddressInput = () => {
   const setIpAddress = useStore((s) => s.action.setIpAddress);
 
   return (
-    <ThemedView style={{ gap: isPhone ? 3 : 8, marginBottom: isPhone ? 2 : 8 }}>
-      <ThemedText type={isPhone ? "default" : "subtitle"}>
+    <View className={`flex ${isPhone ? "gap-[3px] mb-[2px]" : "gap-2 mb-2"}`}>
+      <Text
+        className={`text-white ${isPhone ? "text-md" : "text-xl"} font-bold`}
+      >
         IP Address
-      </ThemedText>
-      <ThemedTextInput
-        style={styles.input}
+      </Text>
+      <TextInput
+        className="text-white border border-[#ccc] p-2 rounded"
         value={ipAddress}
         onChangeText={setIpAddress}
         placeholder="Enter IP Address"
         selectTextOnFocus
       />
-    </ThemedView>
+    </View>
   );
 };

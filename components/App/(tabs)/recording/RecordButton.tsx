@@ -1,8 +1,7 @@
-import { ThemedText } from "@/components/themed-text";
 import { obs } from "@/lib/obs";
 import { stores } from "@/store";
 import { useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 
 export const RecordButton = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
@@ -27,33 +26,18 @@ export const RecordButton = () => {
 
   return (
     <TouchableOpacity
-      style={{
-        ...styles.button,
-        backgroundColor: isRecording ? "red" : "green",
-        height: isPhone ? 240 : 300,
-      }}
+      className={`
+        py-12 px-12 rounded-xl items-center justify-center my-1 
+        ${isRecording ? "bg-red-700" : "bg-green-700"} 
+        ${isPhone ? "h-64" : "h-80"}
+      `}
       onPress={() => toggleRecording()}
     >
-      <ThemedText style={styles.buttonText}>
+      <Text
+        className={`text-white ${isPhone ? "text-6xl" : "text-8xl"} font-bold`}
+      >
         {isRecording ? "Stop" : "Start"}
-      </ThemedText>
+      </Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    paddingVertical: 50,
-    paddingHorizontal: 50,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 5,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 60,
-    lineHeight: 80,
-    fontWeight: "bold",
-  },
-});
