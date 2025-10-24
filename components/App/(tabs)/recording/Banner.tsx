@@ -1,16 +1,16 @@
-import { ThemedView } from "@/components/themed-view";
 import { styles } from "./styles";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { View } from "react-native";
 
 export const Banner = () => {
   return (
-    <ThemedView style={{ ...styles.titleContainer, height: 65 }}>
+    <View className="flex-row gap-2 h-[65px]">
       <IconSymbol
         size={310}
         color="#808080"
         name="chevron.left.forwardslash.chevron.right"
         style={styles.headerImage}
       />
-    </ThemedView>
+    </View>
   );
 };
