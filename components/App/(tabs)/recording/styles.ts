@@ -7,8 +7,4 @@ export const styles = StyleSheet.create({
     left: -35,
     position: "absolute",
   },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
-  },
 });
