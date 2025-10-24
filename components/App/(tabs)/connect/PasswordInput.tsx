@@ -1,5 +1,4 @@
-import { ThemedView } from "@/components/themed-view";
-import { Text, TextInput, TouchableOpacity } from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useStore } from "@/store/connect";
 import { stores } from "@/store";
 
@@ -13,14 +12,8 @@ export const PasswordInput = () => {
   const setShowPassword = useStore((s) => s.action.setShowPassword);
 
   return (
-    <ThemedView style={{ gap: isPhone ? 3 : 8, marginBottom: isPhone ? 2 : 8 }}>
-      <ThemedView
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+    <View className={`flex ${isPhone ? "gap-[3px] mb-[2px]" : "gap-2 mb-2"}`}>
+      <View className="flex flex-row justify-between items-center">
         <Text
           className={`text-white ${isPhone ? "text-md" : "text-xl"} font-bold`}
         >
@@ -31,7 +24,7 @@ export const PasswordInput = () => {
             {showPassword ? "hide" : "show"}
           </Text>
         </TouchableOpacity>
-      </ThemedView>
+      </View>
       <TextInput
         className="text-white border border-[#ccc] p-2 rounded"
         value={password}
@@ -40,6 +33,6 @@ export const PasswordInput = () => {
         secureTextEntry={!showPassword}
         selectTextOnFocus
       />
-    </ThemedView>
+    </View>
   );
 };
