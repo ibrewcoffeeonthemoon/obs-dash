@@ -1,4 +1,3 @@
-import { ThemedText } from "@/components/themed-text";
 import { obs } from "@/lib/obs";
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
@@ -50,6 +49,7 @@ export const RecordingTime = () => {
     return () => clearInterval(interval);
   }, [isRecording, setRecordingTime]); // Re-run effect when isRecording changes
 
+  // custotm extra big font, no tailwindcss can fit
   const fontSize = () => {
     if (isPhone) {
       return showHours ? 75 : 120;
@@ -58,19 +58,16 @@ export const RecordingTime = () => {
     }
   };
 
-  const lineHeight = () => (isPhone ? 100 : 200);
-
   return (
     <View className="pb-2">
-      <ThemedText
+      <Text
         style={{
           fontSize: fontSize(),
-          lineHeight: lineHeight(),
-          textAlign: "center",
         }}
+        className="text-white text-center"
       >
         {recordingTime}
-      </ThemedText>
+      </Text>
     </View>
   );
 };
