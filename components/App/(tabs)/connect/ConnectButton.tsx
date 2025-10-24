@@ -1,6 +1,5 @@
 import { ThemedView } from "@/components/themed-view";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { ThemedText } from "@/components/themed-text";
+import { Text, TouchableOpacity } from "react-native";
 import { useStore } from "@/store/connect";
 import { obs } from "@/lib/obs";
 import { OBSWebSocketError } from "obs-websocket-js";
@@ -77,24 +76,16 @@ export const ConnectButton = () => {
           className="py-4 px-5 rounded-md items-center bg-green-700"
           onPress={connectOBS}
         >
-          <ThemedText style={styles.buttonText}>Connect</ThemedText>
+          <Text className="text-white text-xl font-extrabold">Connect</Text>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
           className="py-4 px-5 rounded-md items-center bg-red-700"
           onPress={disconnectOBS}
         >
-          <ThemedText style={styles.buttonText}>Disconnect</ThemedText>
+          <Text className="text-white text-xl font-extrabold">Disconnect</Text>
         </TouchableOpacity>
       )}
     </ThemedView>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
