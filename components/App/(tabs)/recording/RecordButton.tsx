@@ -29,7 +29,7 @@ export const RecordButton = () => {
       className={`
         py-12 px-12 rounded-xl items-center justify-center my-1 
         ${isRecording ? "bg-red-700" : "bg-green-700"} 
-        ${isPhone ? "h-72" : "h-80"}
+        ${isPhone ? "h-64" : "h-80"}
       `}
       onPress={() => toggleRecording()}
     >
