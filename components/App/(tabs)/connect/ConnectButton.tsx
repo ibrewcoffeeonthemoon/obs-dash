@@ -1,6 +1,5 @@
 import { ThemedView } from "@/components/themed-view";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { styles as otherStyles } from "./styles";
 import { ThemedText } from "@/components/themed-text";
 import { useStore } from "@/store/connect";
 import { obs } from "@/lib/obs";
@@ -104,5 +103,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  ...otherStyles,
 });
