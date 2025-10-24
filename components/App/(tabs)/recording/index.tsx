@@ -1,11 +1,10 @@
-import { ThemedView } from "@/components/themed-view";
 import { Banner } from "./Banner";
 import { RecordingTime } from "./RecordingTime";
 import { RecordButton } from "./RecordButton";
 import { stores } from "@/store";
 import { KeepAwakeButton } from "./KeepAwakeButton";
 import { ProfileName } from "./ProfileName";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 export default function Recording() {
   const isConnected = stores.connect.useStore((s) => s.stash.isConnected);
@@ -13,13 +12,7 @@ export default function Recording() {
   return (
     <>
       <Banner />
-      <ThemedView
-        style={{
-          flex: 1,
-          padding: 32,
-          gap: 16,
-        }}
-      >
+      <View className="flex-1 p-8 gap-4">
         {isConnected ? (
           <>
             <ProfileName />
@@ -32,7 +25,7 @@ export default function Recording() {
             Please connect to OBS first.
           </Text>
         )}
-      </ThemedView>
+      </View>
     </>
   );
 }
