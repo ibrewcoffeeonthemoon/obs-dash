@@ -74,14 +74,14 @@ export const ConnectButton = () => {
     <ThemedView>
       {!isConnected ? (
         <TouchableOpacity
-          style={{ ...styles.button, backgroundColor: "green" }}
+          className="py-4 px-5 rounded-md items-center bg-green-700"
           onPress={connectOBS}
         >
           <ThemedText style={styles.buttonText}>Connect</ThemedText>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
-          style={{ ...styles.button, backgroundColor: "red" }}
+          className="py-4 px-5 rounded-md items-center bg-red-700"
           onPress={disconnectOBS}
         >
           <ThemedText style={styles.buttonText}>Disconnect</ThemedText>
@@ -92,12 +92,6 @@ export const ConnectButton = () => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    alignItems: "center",
-  },
   buttonText: {
     color: "white",
     fontSize: 16,
