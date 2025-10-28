@@ -22,6 +22,14 @@ export const useStore = create<Store>()(
           set((s) => {
             s.stash.profiles = val;
           }),
+        setSceneName: (val) =>
+          set((s) => {
+            s.stash.sceneName = val;
+          }),
+        setScenes: (val) =>
+          set((s) => {
+            s.stash.scenes = val;
+          }),
         setIsRecording: (val) =>
           set((s) => {
             s.stash.isRecording = val;

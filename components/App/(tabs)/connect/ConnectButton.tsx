@@ -18,6 +18,8 @@ export const ConnectButton = () => {
     (s) => s.action.setProfileName,
   );
   const setProfiles = stores.recording.useStore((s) => s.action.setProfiles);
+  const setSceneName = stores.recording.useStore((s) => s.action.setSceneName);
+  const setScenes = stores.recording.useStore((s) => s.action.setScenes);
 
   const connectOBS = async () => {
     try {
@@ -37,6 +39,22 @@ export const ConnectButton = () => {
       setIsRecording(outputActive);
       obs.on("RecordStateChanged", ({ outputActive }) => {
         setIsRecording(outputActive);
+      });
+
+      // get and listen to scene name and scenes state
+      const { currentProgramSceneName, scenes } =
+        await obs.call("GetSceneList");
+      setSceneName(currentProgramSceneName);
+      setScenes(
+        scenes.map((data) => (data as { sceneName: string }).sceneName),
+      );
+      obs.on("CurrentProgramSceneChanged", ({ sceneName }) => {
+        setSceneName(sceneName);
+      });
+      obs.on("SceneListChanged", ({ scenes }) => {
+        setScenes(
+          scenes.map((data) => (data as { sceneName: string }).sceneName),
+        );
       });
 
       // get and listen to profile name and profiles state
