@@ -5,6 +5,7 @@ import { stores } from "@/store";
 import { KeepAwakeButton } from "./KeepAwakeButton";
 import { ProfileName } from "./ProfileName";
 import { Text, View } from "react-native";
+import { SceneName } from "./SceneName";
 
 export default function Recording() {
   const isConnected = stores.connect.useStore((s) => s.stash.isConnected);
@@ -15,6 +16,7 @@ export default function Recording() {
       <View className="flex-1 p-8 gap-4">
         {isConnected ? (
           <>
+            <SceneName />
             <ProfileName />
             <RecordingTime />
             <RecordButton />
