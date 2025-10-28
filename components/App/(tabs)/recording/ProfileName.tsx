@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
   item: {
     color: "white",
     backgroundColor: "black",
-    fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
     width: "100%",
@@ -36,7 +35,12 @@ export const ProfileName = () => {
         onValueChange={(profileName) => setOBSProfile(profileName)}
       >
         {profiles.map((name, i) => (
-          <Picker.Item key={i} style={styles.item} label={name} value={name} />
+          <Picker.Item
+            key={i}
+            style={{ ...styles.item, fontSize: isPhone ? 18 : 26 }}
+            label={name}
+            value={name}
+          />
         ))}
       </Picker>
     </View>
