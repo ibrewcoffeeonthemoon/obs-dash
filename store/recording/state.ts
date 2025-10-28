@@ -5,6 +5,8 @@ export const STATE = {
 export const STASH = {
   profileName: "--",
   profiles: [] as string[],
+  sceneName: "--",
+  scenes: [] as string[],
   isRecording: false,
   recordingTime: "00:00",
 };
