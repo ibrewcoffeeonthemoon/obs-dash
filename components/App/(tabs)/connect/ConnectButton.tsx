@@ -4,6 +4,7 @@ import { obs } from "@/lib/obs";
 import { OBSWebSocketError } from "obs-websocket-js";
 import { stores } from "@/store";
 import { byUnderscoreTop } from "@/lib/sorting";
+import { useRef } from "react";
 
 export const ConnectButton = () => {
   const ipAddress = useStore((s) => s.state.ipAddress);
@@ -21,6 +22,19 @@ export const ConnectButton = () => {
   const setProfiles = stores.recording.useStore((s) => s.action.setProfiles);
   const setSceneName = stores.recording.useStore((s) => s.action.setSceneName);
   const setScenes = stores.recording.useStore((s) => s.action.setScenes);
+  const pingIntervalRef = useRef(0);
+
+  const PING_INTERVAL = 5000;
+  const pingRequest = async () => {
+    try {
+      await obs.call("GetVersion");
+      setIsConnected(true);
+    } catch (error) {
+      console.log("Ping request failed:", error);
+      setIsConnected(false);
+      clearInterval(pingIntervalRef.current);
+    }
+  };
 
   const connectOBS = async () => {
     try {
@@ -34,6 +48,7 @@ export const ConnectButton = () => {
         `Connected to server ${obsWebSocketVersion} (using RPC ${negotiatedRpcVersion})`,
       );
       setIsConnected(true);
+      pingIntervalRef.current = setInterval(pingRequest, PING_INTERVAL);
 
       // get and listen to recording state
       const { outputActive } = await obs.call("GetRecordStatus");
@@ -94,6 +109,8 @@ export const ConnectButton = () => {
       } else {
         console.log(error);
       }
+    } finally {
+      clearInterval(pingIntervalRef.current);
     }
   };
 
