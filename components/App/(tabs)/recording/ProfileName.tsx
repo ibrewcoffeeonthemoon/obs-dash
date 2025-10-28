@@ -1,8 +1,8 @@
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { useState } from "react";
+import { obs } from "@/lib/obs";
 
 const styles = StyleSheet.create({
   item: {
@@ -18,7 +18,11 @@ const styles = StyleSheet.create({
 export const ProfileName = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
   const profileName = useStore((s) => s.stash.profileName);
-  const [selectedValue, setSelectedValue] = useState("java");
+  const profiles = useStore((s) => s.stash.profiles);
+
+  const setOBSProfile = async (profileName: string) => {
+    await obs.call("SetCurrentProfile", { profileName });
+  };
 
   return (
     <View className="flex flex-col justify-between items-center border-2 border-gray-800">
@@ -28,13 +32,12 @@ export const ProfileName = () => {
           width: "100%",
         }}
         dropdownIconColor="white"
-        selectedValue={selectedValue}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        selectedValue={profileName}
+        onValueChange={(profileName) => setOBSProfile(profileName)}
       >
-        <Picker.Item style={styles.item} label="Java" value="java" />
-        <Picker.Item style={styles.item} label="JavaScript" value="js" />
-        <Picker.Item style={styles.item} label="Python" value="python" />
-        <Picker.Item style={styles.item} label="C++" value="cpp" />
+        {profiles.map((name, i) => (
+          <Picker.Item key={i} style={styles.item} label={name} value={name} />
+        ))}
       </Picker>
     </View>
   );
