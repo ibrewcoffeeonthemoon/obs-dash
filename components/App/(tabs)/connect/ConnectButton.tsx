@@ -17,6 +17,7 @@ export const ConnectButton = () => {
   const setProfileName = stores.recording.useStore(
     (s) => s.action.setProfileName,
   );
+  const setProfiles = stores.recording.useStore((s) => s.action.setProfiles);
 
   const connectOBS = async () => {
     try {
@@ -39,8 +40,9 @@ export const ConnectButton = () => {
       });
 
       // get and listen to profile name state
-      const { currentProfileName } = await obs.call("GetProfileList");
+      const { currentProfileName, profiles } = await obs.call("GetProfileList");
       setProfileName(currentProfileName);
+      setProfiles(profiles);
       obs.on("CurrentProfileChanged", ({ profileName }) => {
         setProfileName(profileName);
       });

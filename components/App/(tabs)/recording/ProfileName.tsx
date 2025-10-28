@@ -1,78 +1,48 @@
 import { stores } from "@/store";
 import { useStore } from "@/store/recording";
+import { StyleSheet, View } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import { obs } from "@/lib/obs";
-import { Text, Pressable, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+
+const styles = StyleSheet.create({
+  item: {
+    color: "white",
+    backgroundColor: "black",
+    fontWeight: "bold",
+    textAlign: "center",
+    width: "100%",
+  },
+});
 
 export const ProfileName = () => {
   const isPhone = stores.app.useStore((s) => s.stash.isPhone);
   const profileName = useStore((s) => s.stash.profileName);
+  const profiles = useStore((s) => s.stash.profiles);
 
-  const selectPreviousProfile = async () => {
-    const { currentProfileName, profiles } = await obs.call("GetProfileList");
-    const idx = profiles.indexOf(currentProfileName);
-    if (idx > 0) {
-      const newProfileName = profiles[idx - 1];
-      await obs.call("SetCurrentProfile", { profileName: newProfileName });
-    }
-  };
-
-  const selectNextProfile = async () => {
-    const { currentProfileName, profiles } = await obs.call("GetProfileList");
-    const idx = profiles.indexOf(currentProfileName);
-    if (idx < profiles.length - 1) {
-      const newProfileName = profiles[idx + 1];
-      await obs.call("SetCurrentProfile", { profileName: newProfileName });
-    }
+  const setOBSProfile = async (profileName: string) => {
+    await obs.call("SetCurrentProfile", { profileName });
   };
 
   return (
-    <View className="flex flex-col justify-between items-center">
-      <Pressable
-        onPress={() => selectPreviousProfile()}
-        style={({ pressed }) => [
-          {
-            width: "100%",
-            paddingVertical: 12,
-            borderRadius: 8,
-            backgroundColor: pressed
-              ? "rgba(100, 100, 100, 0.08)"
-              : "transparent",
-          },
-        ]}
+    <View className="flex flex-col justify-between items-center border-2 border-gray-800">
+      <Picker
+        mode="dropdown"
+        style={{
+          width: "100%",
+        }}
+        dropdownIconColor="white"
+        selectedValue={profileName}
+        onValueChange={(profileName) => setOBSProfile(profileName)}
       >
-        <Ionicons
-          name="chevron-up"
-          size={30}
-          style={{ alignSelf: "center", color: "#666666" }}
-        />
-      </Pressable>
-
-      <Text
-        className={`text-white text-center ${isPhone ? "text-2xl" : "text-4xl"} font-bold`}
-      >
-        {profileName}
-      </Text>
-
-      <Pressable
-        onPress={() => selectNextProfile()}
-        style={({ pressed }) => [
-          {
-            width: "100%",
-            paddingVertical: 12,
-            borderRadius: 8,
-            backgroundColor: pressed
-              ? "rgba(100, 100, 100, 0.08)"
-              : "transparent",
-          },
-        ]}
-      >
-        <Ionicons
-          name="chevron-down"
-          size={30}
-          style={{ alignSelf: "center", color: "#666666" }}
-        />
-      </Pressable>
+        {profiles.map((name, i) => (
+          <Picker.Item
+            key={i}
+            style={{ ...styles.item, fontSize: isPhone ? 18 : 26 }}
+            label={name}
+            value={name}
+          />
+        ))}
+      </Picker>
     </View>
   );
 };
