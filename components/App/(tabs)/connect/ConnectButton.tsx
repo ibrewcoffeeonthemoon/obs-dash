@@ -29,7 +29,7 @@ export const ConnectButton = () => {
       await obs.call("GetVersion");
       setIsConnected(true);
     } catch (error) {
-      console.log("Ping request failed:", error);
+      appendLog(`Ping request failed: ${error}`);
       setIsConnected(false);
       stopPing();
     }
