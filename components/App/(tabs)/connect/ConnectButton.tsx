@@ -3,6 +3,7 @@ import { useStore } from "@/store/connect";
 import { obs } from "@/lib/obs";
 import { OBSWebSocketError } from "obs-websocket-js";
 import { stores } from "@/store";
+import { byUnderscoreTop } from "@/lib/sorting";
 
 export const ConnectButton = () => {
   const ipAddress = useStore((s) => s.state.ipAddress);
@@ -46,27 +47,31 @@ export const ConnectButton = () => {
         await obs.call("GetSceneList");
       setSceneName(currentProgramSceneName);
       setScenes(
-        scenes.map((data) => (data as { sceneName: string }).sceneName),
+        scenes
+          .map((data) => (data as { sceneName: string }).sceneName)
+          .sort(byUnderscoreTop),
       );
       obs.on("CurrentProgramSceneChanged", ({ sceneName }) => {
         setSceneName(sceneName);
       });
       obs.on("SceneListChanged", ({ scenes }) => {
         setScenes(
-          scenes.map((data) => (data as { sceneName: string }).sceneName),
+          scenes
+            .map((data) => (data as { sceneName: string }).sceneName)
+            .sort(byUnderscoreTop),
         );
       });
 
       // get and listen to profile name and profiles state
       const { currentProfileName, profiles } = await obs.call("GetProfileList");
       setProfileName(currentProfileName);
-      setProfiles(profiles);
+      setProfiles(profiles.sort(byUnderscoreTop));
       obs.on("CurrentProfileChanged", ({ profileName }) => {
         setProfileName(profileName);
       });
       obs.on("ProfileListChanged", ({ profiles }) => {
         // BUG: profile rename creates duplicates, deletion doesn't fire
-        setProfiles(profiles);
+        setProfiles(profiles.sort(byUnderscoreTop));
       });
     } catch (error) {
       if (error instanceof OBSWebSocketError) {
