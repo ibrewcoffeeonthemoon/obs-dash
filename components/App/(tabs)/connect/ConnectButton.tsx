@@ -39,12 +39,16 @@ export const ConnectButton = () => {
         setIsRecording(outputActive);
       });
 
-      // get and listen to profile name state
+      // get and listen to profile name and profiles state
       const { currentProfileName, profiles } = await obs.call("GetProfileList");
       setProfileName(currentProfileName);
       setProfiles(profiles);
       obs.on("CurrentProfileChanged", ({ profileName }) => {
         setProfileName(profileName);
+      });
+      obs.on("ProfileListChanged", ({ profiles }) => {
+        // BUG: profile rename creates duplicates, deletion doesn't fire
+        setProfiles(profiles);
       });
     } catch (error) {
       if (error instanceof OBSWebSocketError) {
